@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { AiOrb } from '@/components/ui/AiOrb';
-import { ParticleCanvas } from '@/components/ui/ParticleCanvas';
 import { Spotlight } from '@/components/ui/Spotlight';
 import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -12,16 +11,9 @@ export function Hero() {
   const [activeTab, setActiveTab] = useState<'voice' | 'architecture' | 'scorecard'>('voice');
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-grid-pattern bg-[#f8fafc] text-slate-900">
+    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden text-slate-900">
       {/* Spotlight Interactive Cursor Tracking Illumination */}
       <Spotlight />
-
-      {/* 60 FPS Neural Particle Canvas */}
-      <ParticleCanvas />
-
-      {/* Soft Ambient Background Glows */}
-      <div className="glow-blue top-10 left-1/2 -translate-x-1/2 opacity-40 blur-3xl pointer-events-none" />
-      <div className="glow-purple top-40 right-10 opacity-30 blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Top Announcement Badge */}
@@ -29,7 +21,7 @@ export function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-blue-200 text-xs text-blue-600 shadow-sm mb-6 backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-blue-200 text-xs text-blue-600 shadow-sm mb-6 backdrop-blur-md"
         >
           <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
