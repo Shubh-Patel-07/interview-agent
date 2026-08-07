@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 SteerHire – The AI Technical Interviewer & Career Accelerator
 
-## Getting Started
+> **Problem Statement**: *"The Interview Agent – Build the interviewer, not the interview."*
 
-First, run the development server:
+SteerHire is an award-winning, Apple HIG + Linear inspired AI SaaS platform designed to conduct adaptive technical mock interviews out loud. By parsing PDF candidate resumes and dynamically probing architectural trade-offs in real time, SteerHire delivers instant hiring committee evaluation reports.
+
+---
+
+## 🌟 Key Product Capabilities
+
+- 🤖 **Adaptive 3D AI Interviewer (`AppleThreeDOrb.tsx`)**: Real WebGL 3D interactive AI sphere with metallic reflections, voice speech output, and real-time wireframe halos.
+- 📄 **Resume PDF Intelligence Parsing**: Drag-and-Drop PDF parser that automatically extracts candidate skill matrices, past projects, and experience years to tailor probing questions.
+- 🎤 **Real-time Voice & Speech Synthesis**: Integrated Web Speech API for natural voice answers and out-loud question playback.
+- 📊 **Hiring Committee Scorecard Reports**: Detailed report breakdowns spanning Technical Depth, Communication Clarity, Confidence, and Problem Solving with actionable improvement roadmaps.
+- ⚡ **Raycast & Linear Bento Grid Workspace**: Candidate AI command center with `Cmd+K` quick actions, Recharts analytics, and session history tables.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+- **Framework**: Next.js 16 (App Router + Turbopack) & React 19
+- **Graphics & Motion**: Three.js, React Three Fiber, Framer Motion
+- **AI Probing Engine**: Google Gemini 2.5 (`@google/genai`)
+- **Database & Auth**: Supabase PostgreSQL & Row-Level Security
+- **Styling**: Vanilla CSS, TailwindCSS v4, Light Luxury Glassmorphic Design System (`#f8fafc`)
+
+---
+
+## 🚀 Quick Setup & Local Run
 
 ```bash
+# 1. Clone repository
+git clone https://github.com/Shubh-Patel-07/interview-agent.git
+cd interview-agent
+
+# 2. Install dependencies
+npm install
+
+# 3. Launch dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser to experience the platform!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Verified Production Routes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` – Apple Keynote Landing Page & Bento Capability Matrix
+- `/setup` – Candidate Session Configuration Wizard
+- `/resume` – PDF Resume Intelligence Upload & Extraction
+- `/dashboard` – Candidate AI Command Workspace
+- `/history` – Mock Session History Log
+- `/settings` – Candidate Preference Center
+- `/interview/[id]` – Live AI Probing Interview Session
+- `/interview/[id]/report` – Executive Hiring Committee Evaluation Report
