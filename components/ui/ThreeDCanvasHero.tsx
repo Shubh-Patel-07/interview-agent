@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 
 export function ThreeDCanvasHero() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -18,28 +17,28 @@ export function ThreeDCanvasHero() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left - rect.width / 2) * 0.05;
-      mouseY = (e.clientY - rect.top - rect.height / 2) * 0.05;
+      mouseX = (e.clientX - rect.left - rect.width / 2) * 0.03;
+      mouseY = (e.clientY - rect.top - rect.height / 2) * 0.03;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
     const resizeCanvas = () => {
       canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
-      canvas.height = canvas.parentElement?.clientHeight || 650;
+      canvas.height = canvas.parentElement?.clientHeight || 550;
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // 3D Glass Objects Simulation
-    const shapes = Array.from({ length: 18 }, (_, i) => ({
-      x: (Math.random() - 0.5) * canvas.width * 0.8,
-      y: (Math.random() - 0.5) * canvas.height * 0.8,
-      z: Math.random() * 500 + 100,
-      size: Math.random() * 24 + 12,
+    // Subtle 3D Glass Objects Simulation
+    const shapes = Array.from({ length: 10 }, (_, i) => ({
+      x: (Math.random() - 0.5) * canvas.width * 0.7,
+      y: (Math.random() - 0.5) * canvas.height * 0.7,
+      z: Math.random() * 400 + 150,
+      size: Math.random() * 14 + 8,
       rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.02,
-      color: i % 3 === 0 ? 'rgba(37, 99, 235, 0.35)' : i % 3 === 1 ? 'rgba(124, 58, 237, 0.3)' : 'rgba(2, 132, 199, 0.35)',
+      rotSpeed: (Math.random() - 0.5) * 0.015,
+      color: i % 2 === 0 ? 'rgba(37, 99, 235, 0.2)' : 'rgba(124, 58, 237, 0.18)',
     }));
 
     let angle = 0;
@@ -49,14 +48,13 @@ export function ThreeDCanvasHero() {
       const centerX = canvas.width / 2 + mouseX;
       const centerY = canvas.height / 2 + mouseY;
 
-      angle += 0.008;
+      angle += 0.005;
 
-      // Draw 3D Floating Glass Cubes and Spheres
+      // Draw Subtle 3D Shapes
       shapes.forEach((shape) => {
         shape.rotation += shape.rotSpeed;
 
-        // 3D Perspective Projection
-        const perspective = 600 / (600 + shape.z);
+        const perspective = 500 / (500 + shape.z);
         const px = centerX + shape.x * perspective;
         const py = centerY + shape.y * perspective;
         const pSize = shape.size * perspective;
@@ -65,39 +63,17 @@ export function ThreeDCanvasHero() {
         ctx.translate(px, py);
         ctx.rotate(shape.rotation + angle);
 
-        // Glassmorphic 3D Square
         ctx.beginPath();
         ctx.rect(-pSize / 2, -pSize / 2, pSize, pSize);
         ctx.fillStyle = shape.color;
-        ctx.shadowColor = 'rgba(37, 99, 235, 0.2)';
-        ctx.shadowBlur = 15;
         ctx.fill();
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.lineWidth = 1;
         ctx.stroke();
 
         ctx.restore();
       });
-
-      // Rotating Neural Ring
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(angle * 0.5);
-
-      ctx.beginPath();
-      ctx.ellipse(0, 0, 180, 70, angle * 0.3, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(37, 99, 235, 0.15)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.ellipse(0, 0, 240, 90, -angle * 0.2, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(124, 58, 237, 0.15)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      ctx.restore();
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -112,8 +88,8 @@ export function ThreeDCanvasHero() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-      <canvas ref={canvasRef} className="w-full h-full opacity-80" />
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <canvas ref={canvasRef} className="w-full h-full opacity-40" />
     </div>
   );
 }
