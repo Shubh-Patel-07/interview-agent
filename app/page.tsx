@@ -3,6 +3,7 @@ import { Hero } from '@/components/landing/Hero';
 import { Features } from '@/components/landing/Features';
 import { HowItWorks } from '@/components/landing/HowItWorks';
 import { Testimonials } from '@/components/landing/Testimonials';
+import { FAQ } from '@/components/landing/FAQ';
 import { CTA } from '@/components/landing/CTA';
 import { Footer } from '@/components/shared/Footer';
 
@@ -15,6 +16,7 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <Testimonials />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

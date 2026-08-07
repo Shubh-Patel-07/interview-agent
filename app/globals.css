@@ -32,58 +32,53 @@ body {
   overflow-x: hidden;
 }
 
-/* Glassmorphism & SaaS Premium Utilities */
+/* Linear & Vercel Inspired SteerHire Glassmorphism */
 .glass-card {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(13, 18, 30, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-hover:hover {
-  background: rgba(30, 41, 59, 0.75);
-  border-color: rgba(168, 85, 247, 0.3);
-  box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.15);
+  background: rgba(22, 30, 49, 0.8);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 35px -10px rgba(99, 102, 241, 0.2);
   transform: translateY(-2px);
 }
 
 .glass-input {
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
 }
 
 .glass-input:focus {
   outline: none;
-  border-color: rgba(168, 85, 247, 0.6);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gradient-text-alt {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-button {
-  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   transition: all 0.3s ease;
 }
 
 .gradient-button:hover {
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.45);
 }
 
 /* Background Gradients & Glows */
@@ -94,6 +89,14 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
+.glow-indigo {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+}
+
 .glow-purple {
   position: absolute;
   width: 500px;
@@ -102,13 +105,30 @@ body {
   pointer-events: none;
 }
 
-.glow-cyan {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
-  pointer-events: none;
+/* Skeleton Shimmer Animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(30, 41, 59, 0.5) 25%, rgba(51, 65, 85, 0.8) 50%, rgba(30, 41, 59, 0.5) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+/* Audio Wave Equalizer Animation */
+@keyframes soundwave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+.wave-bar {
+  animation: soundwave 1.2s infinite ease-in-out;
+}
+.wave-bar:nth-child(2) { animation-delay: 0.2s; }
+.wave-bar:nth-child(3) { animation-delay: 0.4s; }
+.wave-bar:nth-child(4) { animation-delay: 0.6s; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

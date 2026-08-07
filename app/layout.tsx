@@ -13,13 +13,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "The Interview Agent | Build the Interviewer, Not the Interview",
-  description: "AI-Powered SaaS platform conducting adaptive, resume-tailored technical & behavioral interviews with instant real-time evaluation and actionable reports.",
-  keywords: ["AI Interviewer", "Mock Interview", "Tech Interview Prep", "AI SaaS", "Resume Analysis"],
-  authors: [{ name: "Interview Agent Team" }],
+  title: "SteerHire | AI Interview Platform & Career Accelerator",
+  description: "Practice technical and behavioral mock interviews with an adaptive AI interviewer tailored to your resume, role, and target difficulty. Get instant hiring reports.",
+  keywords: ["SteerHire", "AI Interviewer", "Mock Interview", "Tech Interview Prep", "Linear UI SaaS", "Resume Analysis"],
+  authors: [{ name: "SteerHire Product Team" }],
   openGraph: {
-    title: "The Interview Agent | AI Mock Interview SaaS",
-    description: "Practice real tech interviews with an adaptive AI interviewer.",
+    title: "SteerHire | World-Class AI Interview SaaS Platform",
+    description: "Build the interviewer, not the interview. Experience adaptive AI interview practice.",
     type: "website",
   },
 };
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${outfit.variable} h-full antialiased`}>
-      <body className={`${inter.className} min-h-full flex flex-col bg-[#05070d] text-slate-100 selection:bg-purple-500 selection:text-white`}>
+      <body className={`${inter.className} min-h-full flex flex-col bg-[#05070d] text-slate-100 selection:bg-indigo-500 selection:text-white`}>
         {children}
       </body>
     </html>

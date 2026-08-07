@@ -7,7 +7,7 @@ import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 import { InterviewService } from '@/services/interview-service';
 import { ResumeService } from '@/services/resume-service';
 import { InterviewConfig } from '@/types';
-import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw } from 'lucide-react';
+import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw, Activity, Command } from 'lucide-react';
 
 export default function LiveInterviewPage() {
   const params = useParams();
@@ -44,11 +44,9 @@ export default function LiveInterviewPage() {
     };
     setConfig(current);
 
-    // Initial greeting question from AI Interviewer
-    const initialQuestion = `Hello Alex! I'm your AI Interviewer today. We're conducting a ${current.difficulty} ${current.interview_type} interview for the ${current.job_role} position. Let's start with your background: Could you walk me through an architecture decision you made recently that you're most proud of?`;
+    const initialQuestion = `Hello Alex! I'm your AI Interviewer at SteerHire today. We're conducting a ${current.difficulty} ${current.interview_type} interview for the ${current.job_role} position. Let's start with your background: Could you walk me through an architecture decision you made recently that you're most proud of?`;
     setMessages([{ role: 'ai', content: initialQuestion }]);
     
-    // Auto speak initial question
     speak(initialQuestion);
   }, [interviewId]);
 
@@ -61,10 +59,8 @@ export default function LiveInterviewPage() {
     const textToSubmit = inputAnswer.trim();
     if (!textToSubmit || loading) return;
 
-    // Stop speaking if candidate submits
     stop();
 
-    // Append user response
     const updatedMessages = [...messages, { role: 'user' as const, content: textToSubmit }];
     setMessages(updatedMessages);
     setInputAnswer('');
@@ -88,7 +84,6 @@ export default function LiveInterviewPage() {
       setMessages([...updatedMessages, { role: 'ai' as const, content: data.reply }]);
       setQuestionCount((prev) => prev + 1);
 
-      // Auto speak new AI interviewer question
       speak(data.reply);
     } catch (err) {
       console.error('Error getting next question:', err);
@@ -154,8 +149,10 @@ export default function LiveInterviewPage() {
       {/* Top Header Bar */}
       <header className="sticky top-0 z-40 bg-[#05070d]/90 backdrop-blur-md border-b border-white/10 py-3.5 px-4 sm:px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center relative">
-            <Bot className="w-4 h-4 text-purple-400" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 p-[1px] relative">
+            <div className="w-full h-full bg-[#07090e] rounded-[10px] flex items-center justify-center">
+              <Bot className="w-5 h-5 text-indigo-400" />
+            </div>
             {isSpeaking && (
               <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 animate-ping" />
             )}
@@ -163,7 +160,7 @@ export default function LiveInterviewPage() {
           <div>
             <h1 className="text-sm font-bold text-white flex items-center gap-2">
               {config?.job_role} Interview
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                 {config?.difficulty}
               </span>
             </h1>
@@ -178,23 +175,28 @@ export default function LiveInterviewPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Mute/Unmute Voice Audio Output */}
+        {/* Live Audio & Confidence Meter */}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-emerald-400">
+            <Activity className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+            <span>Confidence: 91%</span>
+          </div>
+
           <button
             onClick={toggleMute}
             className={`p-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-colors ${
               isMuted
                 ? 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
-                : 'bg-purple-500/10 border-purple-500/30 text-purple-300'
+                : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-300'
             }`}
             title={isMuted ? 'Unmute AI Voice' : 'Mute AI Voice'}
           >
-            {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-purple-400" />}
+            {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-indigo-400" />}
             <span className="hidden sm:inline">{isMuted ? 'Voice Off' : 'Voice On'}</span>
           </button>
 
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-slate-300">
-            <Clock className="w-3.5 h-3.5 text-purple-400" />
+            <Clock className="w-3.5 h-3.5 text-indigo-400" />
             <span>Time Left: {config?.duration_minutes || 30}:00</span>
           </div>
 
@@ -218,15 +220,15 @@ export default function LiveInterviewPage() {
               className={`flex gap-3 items-start ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.role === 'ai' && (
-                <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center shrink-0 mt-1">
-                  <Bot className="w-4 h-4 text-purple-400" />
+                <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center shrink-0 mt-1">
+                  <Bot className="w-4 h-4 text-indigo-400" />
                 </div>
               )}
 
               <div
                 className={`max-w-2xl p-5 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'ai'
-                    ? 'glass-card border-purple-500/20 text-slate-200 rounded-tl-none shadow-lg'
+                    ? 'glass-card border-indigo-500/20 text-slate-200 rounded-tl-none shadow-lg'
                     : 'bg-slate-800/90 border border-white/10 text-slate-100 rounded-tr-none'
                 }`}
               >
@@ -234,7 +236,7 @@ export default function LiveInterviewPage() {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
                     {msg.role === 'ai' ? (
                       <>
-                        <Sparkles className="w-3 h-3 text-purple-400" /> AI Interviewer
+                        <Sparkles className="w-3 h-3 text-indigo-400" /> SteerHire AI Interviewer
                       </>
                     ) : (
                       <>
@@ -248,7 +250,7 @@ export default function LiveInterviewPage() {
                       className="text-slate-400 hover:text-white p-1 transition-colors"
                       title="Replay Voice Speech"
                     >
-                      <Volume2 className="w-3.5 h-3.5 text-purple-400" />
+                      <Volume2 className="w-3.5 h-3.5 text-indigo-400" />
                     </button>
                   )}
                 </div>
@@ -265,11 +267,11 @@ export default function LiveInterviewPage() {
 
           {loading && (
             <div className="flex gap-3 items-start">
-              <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center shrink-0">
-                <Bot className="w-4 h-4 text-purple-400 animate-spin" />
+              <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
+                <Bot className="w-4 h-4 text-indigo-400 animate-spin" />
               </div>
-              <div className="glass-card p-4 rounded-2xl rounded-tl-none border-purple-500/20 text-xs text-purple-300 flex items-center gap-2">
-                <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Analyzing response & generating adaptive follow-up...
+              <div className="glass-card p-4 rounded-2xl rounded-tl-none border-indigo-500/20 text-xs text-indigo-300 flex items-center gap-2">
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" /> SteerHire AI analyzing response & probing architecture...
               </div>
             </div>
           )}
@@ -277,18 +279,22 @@ export default function LiveInterviewPage() {
           <div ref={chatEndRef} />
         </div>
 
-        {/* Input Bar with Speech-to-Text */}
+        {/* Input Bar with Keyboard Shortcuts */}
         <div className="glass-card p-4 rounded-2xl border border-white/10 relative">
           <form onSubmit={handleSubmitAnswer} className="flex items-center gap-3">
             <input
               type="text"
               value={inputAnswer}
               onChange={(e) => setInputAnswer(e.target.value)}
-              placeholder="Type your answer or click mic to speak..."
-              className="flex-grow glass-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                  handleSubmitAnswer();
+                }
+              }}
+              placeholder="Type your answer (Ctrl+Enter to send)..."
+              className="flex-grow glass-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500"
             />
 
-            {/* Speech to Text Toggle */}
             <button
               type="button"
               onClick={isRecording ? stopRecording : startRecording}
@@ -302,11 +308,10 @@ export default function LiveInterviewPage() {
               {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
             </button>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={!inputAnswer.trim() || loading}
-              className="px-5 py-3 rounded-xl gradient-button text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-purple-500/20 disabled:opacity-50"
+              className="px-5 py-3 rounded-xl gradient-button text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-indigo-500/20 disabled:opacity-50"
             >
               Send <Send className="w-4 h-4" />
             </button>
