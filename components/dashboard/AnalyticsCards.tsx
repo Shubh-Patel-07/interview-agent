@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Award, CheckCircle2, TrendingUp, Cpu, MessageSquare } from 'lucide-react';
 
 interface AnalyticsProps {
@@ -52,7 +55,13 @@ export function AnalyticsCards({ totalInterviews, avgScore, techScore, commScore
       {CARDS.map((card, idx) => {
         const Icon = card.icon;
         return (
-          <div key={idx} className="glass-card glass-card-hover p-6 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between shadow-sm">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: idx * 0.1 }}
+            className="glass-card glass-card-hover p-6 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between shadow-sm"
+          >
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{card.title}</span>
               <div className={`w-10 h-10 rounded-2xl ${card.bg} ${card.border} border flex items-center justify-center`}>
@@ -66,7 +75,7 @@ export function AnalyticsCards({ totalInterviews, avgScore, techScore, commScore
                 {card.change}
               </p>
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>
