@@ -27,6 +27,7 @@ export function Footer() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200">Product Suite</h4>
             <Link href="#features" className="text-xs text-slate-400 hover:text-white transition-colors">AI Adaptive Probing Engine</Link>
             <Link href="#how-it-works" className="text-xs text-slate-400 hover:text-white transition-colors">Resume PDF Intelligence</Link>
+            <Link href="#pricing" className="text-xs text-slate-400 hover:text-white transition-colors">Pricing & Plans</Link>
             <Link href="/dashboard" className="text-xs text-slate-400 hover:text-white transition-colors">Performance Analytics</Link>
             <Link href="/setup" className="text-xs text-slate-400 hover:text-white transition-colors">Mock Session Setup</Link>
           </div>
