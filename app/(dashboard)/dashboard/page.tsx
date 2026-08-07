@@ -8,7 +8,7 @@ import { PerformanceChart } from '@/components/dashboard/PerformanceChart';
 import { RecentInterviewsTable } from '@/components/dashboard/RecentInterviewsTable';
 import { InterviewService } from '@/services/interview-service';
 import { ResumeService } from '@/services/resume-service';
-import { PlusCircle, FileText, Bot, Sparkles, CheckCircle2 } from 'lucide-react';
+import { PlusCircle, FileText, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function DashboardPage() {
   const [interviews, setInterviews] = useState<any[]>([]);
@@ -25,41 +25,41 @@ export default function DashboardPage() {
   const avgScore = interviews.reduce((acc, curr) => acc + (curr.score || 80), 0) / (totalInterviews || 1);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#05070d] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
       <DashboardHeader />
 
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-8 py-8 space-y-8">
         {/* Banner Section */}
-        <div className="glass-card p-6 sm:p-8 rounded-3xl border border-purple-500/30 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="glow-purple -top-20 left-10 opacity-30 blur-3xl pointer-events-none" />
+        <div className="glass-card p-6 sm:p-8 rounded-3xl border border-blue-500/20 bg-white relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+          <div className="glow-blue -top-20 left-10 opacity-30 blur-3xl pointer-events-none" />
           
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" /> Candidate Portal
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" /> SteerHire Candidate Portal
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Welcome back, <span className="gradient-text">Alex Dev</span>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900">
+              Welcome back, <span className="gradient-text font-extrabold">Alex Dev</span>
             </h1>
-            <p className="text-sm text-slate-400 max-w-xl">
-              Ready for your next mock interview? Your active resume is tailored for <strong className="text-purple-300">Full Stack Engineering</strong> roles.
+            <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
+              Ready for your next mock interview? Your active resume context is tailored for <strong className="text-blue-600 font-bold">Full Stack Engineering</strong> roles.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               href="/resume"
-              className="px-4 py-2.5 rounded-xl glass-card glass-card-hover text-xs font-semibold text-slate-200 border border-white/10 flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors"
             >
-              <FileText className="w-4 h-4 text-cyan-400" />
+              <FileText className="w-4 h-4 text-blue-600" />
               {resume ? 'Resume Active' : 'Upload Resume'}
             </Link>
 
             <Link
               href="/setup"
-              className="px-5 py-2.5 rounded-xl gradient-button text-xs font-semibold text-white flex items-center gap-2 shadow-lg shadow-purple-500/25"
+              className="px-5 py-2.5 rounded-xl gradient-button text-xs font-bold text-white flex items-center gap-2 shadow-lg shadow-blue-500/20"
             >
               <PlusCircle className="w-4 h-4" />
-              Start New Mock Interview
+              Start New AI Interview
             </Link>
           </div>
         </div>
@@ -78,26 +78,26 @@ export default function DashboardPage() {
             <PerformanceChart />
           </div>
 
-          <div className="glass-card p-6 rounded-2xl border border-white/10 flex flex-col justify-between space-y-4">
+          <div className="glass-card p-6 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between space-y-4 shadow-sm">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-purple-400" /> Active Resume Context
+                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-blue-600" /> Active Resume Context
                 </h3>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 font-mono font-bold">
                   Parsed
                 </span>
               </div>
-              <p className="text-xs font-semibold text-white">{resume?.file_name || 'Alex_Dev_Resume.pdf'}</p>
-              <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              <p className="text-xs font-bold text-slate-900">{resume?.file_name || 'Alex_Dev_Resume.pdf'}</p>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
                 {resume?.parsed_data?.summary || '4 years experience with React, Next.js 15, PostgreSQL, and Node.js.'}
               </p>
 
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block mb-2">Detected Tech Skills</span>
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Detected Tech Skills</span>
                 <div className="flex flex-wrap gap-1.5">
                   {(resume?.parsed_data?.skills || ['TypeScript', 'Next.js', 'PostgreSQL', 'Tailwind']).map((skill: string, i: number) => (
-                    <span key={i} className="px-2 py-1 rounded-md bg-slate-800 text-[11px] text-slate-300 border border-slate-700">
+                    <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-100 text-[11px] text-slate-700 font-semibold border border-slate-200">
                       {skill}
                     </span>
                   ))}
@@ -107,7 +107,7 @@ export default function DashboardPage() {
 
             <Link
               href="/resume"
-              className="w-full py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-center text-xs font-semibold text-purple-300 border border-purple-500/20 transition-colors"
+              className="w-full py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-center text-xs font-bold text-blue-600 border border-blue-200 transition-colors"
             >
               Update Resume PDF
             </Link>

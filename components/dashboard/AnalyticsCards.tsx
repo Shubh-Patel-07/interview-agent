@@ -14,36 +14,36 @@ export function AnalyticsCards({ totalInterviews, avgScore, techScore, commScore
       value: `${avgScore}%`,
       change: '+12% this month',
       icon: Award,
-      color: 'text-purple-400',
-      bg: 'bg-purple-500/10',
-      border: 'border-purple-500/20',
+      color: 'text-purple-600',
+      bg: 'bg-purple-50',
+      border: 'border-purple-200',
     },
     {
       title: 'Interviews Completed',
       value: totalInterviews.toString(),
       change: '3 active sessions',
       icon: CheckCircle2,
-      color: 'text-cyan-400',
-      bg: 'bg-cyan-500/10',
-      border: 'border-cyan-500/20',
+      color: 'text-blue-600',
+      bg: 'bg-blue-50',
+      border: 'border-blue-200',
     },
     {
       title: 'Technical Depth',
       value: `${techScore}%`,
       change: 'Strong proficiency',
       icon: Cpu,
-      color: 'text-emerald-400',
-      bg: 'bg-emerald-500/10',
-      border: 'border-emerald-500/20',
+      color: 'text-emerald-600',
+      bg: 'bg-emerald-50',
+      border: 'border-emerald-200',
     },
     {
       title: 'Communication',
       value: `${commScore}%`,
       change: 'Articulate & structured',
       icon: MessageSquare,
-      color: 'text-amber-400',
-      bg: 'bg-amber-500/10',
-      border: 'border-amber-500/20',
+      color: 'text-amber-600',
+      bg: 'bg-amber-50',
+      border: 'border-amber-200',
     },
   ];
 
@@ -52,17 +52,17 @@ export function AnalyticsCards({ totalInterviews, avgScore, techScore, commScore
       {CARDS.map((card, idx) => {
         const Icon = card.icon;
         return (
-          <div key={idx} className="glass-card glass-card-hover p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
+          <div key={idx} className="glass-card glass-card-hover p-6 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-medium text-slate-400">{card.title}</span>
-              <div className={`w-9 h-9 rounded-xl ${card.bg} ${card.border} border flex items-center justify-center`}>
-                <Icon className={`w-4 h-4 ${card.color}`} />
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{card.title}</span>
+              <div className={`w-10 h-10 rounded-2xl ${card.bg} ${card.border} border flex items-center justify-center`}>
+                <Icon className={`w-5 h-5 ${card.color}`} />
               </div>
             </div>
             <div>
-              <h3 className="text-3xl font-extrabold text-white tracking-tight">{card.value}</h3>
-              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
-                <TrendingUp className="w-3 h-3 text-emerald-400 inline" />
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight">{card.value}</h3>
+              <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 font-medium">
+                <TrendingUp className="w-3.5 h-3.5 text-emerald-600 inline" />
                 {card.change}
               </p>
             </div>
