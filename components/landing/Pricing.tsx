@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
-import { Check, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Check, ArrowRight } from 'lucide-react';
 
 const PLANS = [
   {
@@ -35,28 +38,38 @@ const PLANS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24 relative bg-[#05070d]">
+    <section id="pricing" className="py-28 relative bg-[#fafafa]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
             Simple Pricing
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-4">
             Practice for Free During Hackathon
           </h2>
-          <p className="text-slate-500 text-sm mt-2">
+          <p className="text-slate-500 text-sm mt-2 font-normal">
             No credit card required. Experience candidate coaching in under 2 minutes.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {PLANS.map((plan, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className={`glass-card p-8 rounded-3xl border flex flex-col justify-between relative ${
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              className={`glass-card glass-card-hover p-8 rounded-3xl border flex flex-col justify-between relative ${
                 plan.popular
-                  ? 'border-blue-500/40 shadow-2xl bg-white'
-                  : 'border-slate-200/80 bg-white/70'
+                  ? 'border-blue-500/40 shadow-xl bg-white'
+                  : 'border-slate-200/80 bg-white'
               }`}
             >
               {plan.popular && (
@@ -67,14 +80,14 @@ export function Pricing() {
 
               <div>
                 <h3 className="text-xl font-bold text-slate-900">{plan.name}</h3>
-                <p className="text-xs text-slate-500 mt-1">{plan.description}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">{plan.description}</p>
 
                 <div className="mt-6 flex items-baseline gap-1">
                   <span className="text-4xl font-black text-slate-900">{plan.price}</span>
                   {plan.period && <span className="text-xs text-slate-400 font-medium">{plan.period}</span>}
                 </div>
 
-                <ul className="mt-8 space-y-3 text-xs text-slate-600">
+                <ul className="mt-8 space-y-3 text-xs text-slate-600 font-medium">
                   {plan.features.map((feat, i) => (
                     <li key={i} className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-blue-600 shrink-0" />
@@ -86,7 +99,7 @@ export function Pricing() {
 
               <Link
                 href="/setup"
-                className={`mt-8 w-full py-3.5 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition-all ${
+                className={`mt-8 w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
                   plan.popular
                     ? 'gradient-button text-white shadow-lg shadow-blue-500/25'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200'
@@ -94,7 +107,7 @@ export function Pricing() {
               >
                 {plan.cta} <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

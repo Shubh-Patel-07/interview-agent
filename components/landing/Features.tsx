@@ -1,4 +1,7 @@
-import { FileText, Cpu, Award, Zap, ShieldCheck, BarChart3, Mic, Sparkles } from 'lucide-react';
+'use client';
+
+import { motion } from 'framer-motion';
+import { FileText, Cpu, Award, Zap, BarChart3, Mic, Sparkles } from 'lucide-react';
 
 const FEATURES = [
   {
@@ -53,26 +56,36 @@ const FEATURES = [
 
 export function Features() {
   return (
-    <section id="features" className="py-24 relative bg-white">
+    <section id="features" className="py-28 relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Key Capabilities
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
             Engineered like a <span className="gradient-text">Real Interviewer</span>
           </h2>
-          <p className="mt-4 text-slate-500 text-base sm:text-lg">
+          <p className="mt-4 text-slate-500 text-base sm:text-lg font-normal">
             Everything you need to practice under realistic technical interview conditions and land your dream offer.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {FEATURES.map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="glass-card glass-card-hover p-8 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between group shadow-sm"
               >
                 <div>
@@ -82,11 +95,11 @@ export function Features() {
                   <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">
+                  <p className="text-slate-500 text-sm leading-relaxed font-normal">
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

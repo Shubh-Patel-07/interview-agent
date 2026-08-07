@@ -6,7 +6,7 @@ import { DashboardHeader } from '@/components/shared/DashboardHeader';
 import { ResumeService } from '@/services/resume-service';
 import { InterviewService } from '@/services/interview-service';
 import { JobRole, ExperienceLevel, InterviewDifficulty, InterviewType, InterviewConfig } from '@/types';
-import { Bot, Sparkles, Check, ArrowRight, ShieldCheck, Clock, Settings, FileText } from 'lucide-react';
+import { Bot, Sparkles, ArrowRight, FileText } from 'lucide-react';
 
 const JOB_ROLES: JobRole[] = [
   'Frontend Developer',
@@ -72,25 +72,25 @@ export default function InterviewSetupPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#05070d] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
       <DashboardHeader />
 
       <main className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
             Step 2 of Setup
           </span>
-          <h1 className="text-3xl font-extrabold text-white mt-3">Configure Mock Interview</h1>
-          <p className="text-sm text-slate-400 mt-1">
+          <h1 className="text-3xl font-black text-slate-900 mt-3">Configure AI Mock Interview</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
             Customize role domain, difficulty probe, and interview constraints before launching the AI agent.
           </p>
         </div>
 
         {/* Setup Form Grid */}
-        <div className="glass-card p-8 rounded-3xl border border-white/10 space-y-8">
+        <div className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white shadow-sm space-y-8">
           {/* Section 1: Job Role Selection */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
               1. Target Job Role
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -99,10 +99,10 @@ export default function InterviewSetupPage() {
                   key={role}
                   type="button"
                   onClick={() => setSelectedRole(role)}
-                  className={`p-3.5 rounded-xl border text-xs font-semibold text-left transition-all ${
+                  className={`p-3.5 rounded-2xl border text-xs font-bold text-left transition-all ${
                     selectedRole === role
-                      ? 'bg-purple-600/30 border-purple-500 text-white shadow-md shadow-purple-500/20'
-                      : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
                   {role}
@@ -113,7 +113,7 @@ export default function InterviewSetupPage() {
 
           {/* Section 2: Experience Level */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
               2. Experience Level
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -122,10 +122,10 @@ export default function InterviewSetupPage() {
                   key={exp}
                   type="button"
                   onClick={() => setSelectedExp(exp)}
-                  className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                  className={`p-3 rounded-2xl border text-xs font-bold transition-all ${
                     selectedExp === exp
-                      ? 'bg-purple-600/30 border-purple-500 text-white'
-                      : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800'
+                      ? 'bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-500/20'
+                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
                   {exp}
@@ -137,7 +137,7 @@ export default function InterviewSetupPage() {
           {/* Section 3: Difficulty & Type */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
                 3. Probing Difficulty
               </label>
               <div className="grid grid-cols-2 gap-2.5">
@@ -146,10 +146,10 @@ export default function InterviewSetupPage() {
                     key={diff}
                     type="button"
                     onClick={() => setSelectedDiff(diff)}
-                    className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    className={`p-3 rounded-2xl border text-xs font-bold transition-all ${
                       selectedDiff === diff
-                        ? 'bg-cyan-600/30 border-cyan-500 text-white'
-                        : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800'
+                        ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     {diff}
@@ -159,7 +159,7 @@ export default function InterviewSetupPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
                 4. Interview Type
               </label>
               <div className="grid grid-cols-2 gap-2.5">
@@ -168,10 +168,10 @@ export default function InterviewSetupPage() {
                     key={type}
                     type="button"
                     onClick={() => setSelectedType(type)}
-                    className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    className={`p-3 rounded-2xl border text-xs font-bold transition-all ${
                       selectedType === type
-                        ? 'bg-cyan-600/30 border-cyan-500 text-white'
-                        : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800'
+                        ? 'bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-500/20'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     {type}
@@ -183,9 +183,9 @@ export default function InterviewSetupPage() {
 
           {/* Duration Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3 flex items-center justify-between">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center justify-between">
               <span>5. Target Session Duration</span>
-              <span className="text-purple-400 font-mono">{duration} Minutes</span>
+              <span className="text-blue-600 font-mono font-bold">{duration} Minutes</span>
             </label>
             <div className="flex gap-4">
               {[15, 30, 45, 60].map((mins) => (
@@ -193,10 +193,10 @@ export default function InterviewSetupPage() {
                   key={mins}
                   type="button"
                   onClick={() => setDuration(mins)}
-                  className={`flex-1 py-2.5 rounded-xl border text-xs font-semibold ${
+                  className={`flex-1 py-2.5 rounded-2xl border text-xs font-bold ${
                     duration === mins
-                      ? 'bg-purple-600/30 border-purple-500 text-white'
-                      : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
                   {mins} mins
@@ -206,17 +206,17 @@ export default function InterviewSetupPage() {
           </div>
 
           {/* Action Launch Bar */}
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
-              <FileText className="w-4 h-4 text-emerald-400" />
-              <span>Resume personalizations active</span>
+          <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <FileText className="w-4 h-4 text-emerald-600" />
+              <span>Resume context personalizations active</span>
             </div>
 
             <button
               onClick={handleStartInterview}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl gradient-button text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-xl shadow-purple-500/25"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl gradient-button text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-transform"
             >
-              <Bot className="w-4 h-4 text-purple-200" />
+              <Bot className="w-4 h-4 text-white" />
               Launch AI Interview Agent <ArrowRight className="w-4 h-4" />
             </button>
           </div>
