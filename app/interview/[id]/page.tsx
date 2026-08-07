@@ -21,17 +21,24 @@ export default function LiveInterviewPage() {
   const [loading, setLoading] = useState(false);
   const [questionCount, setQuestionCount] = useState(1);
   const [isFinishing, setIsFinishing] = useState(false);
+  
+  // Real-time Countdown Stopwatch Timer
+  const [secondsLeft, setSecondsLeft] = useState<number>(30 * 60);
+
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { isRecording, transcript, startRecording, stopRecording, resetTranscript } = useAudioRecorder();
   const { isSpeaking, isMuted, speak, stop, toggleMute } = useSpeechSynthesis();
 
+  // Handle Voice Transcript Output
   useEffect(() => {
     if (transcript) {
       setInputAnswer(transcript);
     }
   }, [transcript]);
 
+  // Load Session Config & Initial AI Question
   useEffect(() => {
     const list = InterviewService.getLocalInterviews();
     const current = list.find((i) => i.id === interviewId) || {
@@ -44,6 +51,7 @@ export default function LiveInterviewPage() {
       status: 'in_progress',
     };
     setConfig(current);
+    setSecondsLeft((current.duration_minutes || 30) * 60);
 
     const initialQuestion = `Hello Alex! I'm your AI Interviewer at SteerHire today. We're conducting a ${current.difficulty} ${current.interview_type} interview for the ${current.job_role} position. Let's start with your background: Could you walk me through an architecture decision you made recently that you're most proud of?`;
     setMessages([{ role: 'ai', content: initialQuestion }]);
@@ -51,9 +59,28 @@ export default function LiveInterviewPage() {
     speak(initialQuestion);
   }, [interviewId]);
 
+  // Live Stopwatch Interval
+  useEffect(() => {
+    if (secondsLeft <= 0) return;
+    const timer = setInterval(() => {
+      setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [secondsLeft]);
+
+  // Auto scroll chat to bottom
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
+    if (!loading && !isSpeaking) {
+      inputRef.current?.focus();
+    }
+  }, [messages, loading, isSpeaking]);
+
+  const formatTimer = (totalSeconds: number) => {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
 
   const handleSubmitAnswer = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -176,7 +203,7 @@ export default function LiveInterviewPage() {
           </div>
         </div>
 
-        {/* Live Audio & Confidence Meter */}
+        {/* Live Audio & Stopwatch Timer */}
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-mono font-bold text-emerald-600">
             <Activity className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
@@ -196,9 +223,10 @@ export default function LiveInterviewPage() {
             <span className="hidden sm:inline">{isMuted ? 'Voice Off' : 'Voice On'}</span>
           </button>
 
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-slate-700">
-            <Clock className="w-3.5 h-3.5 text-blue-600" />
-            <span>Time Left: {config?.duration_minutes || 30}:00</span>
+          {/* Real-time Counting Stopwatch Timer */}
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-50 border border-blue-200 text-xs font-mono font-black text-blue-600 shadow-sm">
+            <Clock className="w-4 h-4 text-blue-600 animate-spin" style={{ animationDuration: '10s' }} />
+            <span>Time Left: {formatTimer(secondsLeft)}</span>
           </div>
 
           <button
@@ -216,8 +244,11 @@ export default function LiveInterviewPage() {
         {/* Messages Stream Container */}
         <div className="flex-grow space-y-6 overflow-y-auto pr-2">
           {messages.map((msg, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
               className={`flex gap-3 items-start ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.role === 'ai' && (
@@ -263,7 +294,7 @@ export default function LiveInterviewPage() {
                   <User className="w-4 h-4 text-cyan-400" />
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
 
           {loading && (
@@ -284,15 +315,16 @@ export default function LiveInterviewPage() {
         <div className="glass-card p-4 rounded-2xl border border-slate-200/80 bg-white relative shadow-sm">
           <form onSubmit={handleSubmitAnswer} className="flex items-center gap-3">
             <input
+              ref={inputRef}
               type="text"
               value={inputAnswer}
               onChange={(e) => setInputAnswer(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                if (e.key === 'Enter') {
                   handleSubmitAnswer();
                 }
               }}
-              placeholder="Type your answer (Ctrl+Enter to send)..."
+              placeholder="Type your answer and press Enter to send..."
               className="flex-grow glass-input rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500"
             />
 
