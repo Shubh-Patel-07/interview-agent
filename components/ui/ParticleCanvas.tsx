@@ -14,21 +14,25 @@ export function ParticleCanvas() {
     let animationFrameId: number;
 
     const resizeCanvas = () => {
-      canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
-      canvas.height = canvas.parentElement?.clientHeight || 600;
+      canvas.width = window.innerWidth;
+      canvas.height = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        window.innerHeight
+      );
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Particle pool
-    const particleCount = 45;
+    // Particle pool spanning full document height
+    const particleCount = 75;
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: Math.random() * 2 + 1,
-      color: Math.random() > 0.5 ? 'rgba(37, 99, 235, 0.4)' : 'rgba(124, 58, 237, 0.3)',
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      radius: Math.random() * 2.2 + 1,
+      color: Math.random() > 0.5 ? 'rgba(37, 99, 235, 0.45)' : 'rgba(124, 58, 237, 0.35)',
     }));
 
     const render = () => {
@@ -41,11 +45,11 @@ export function ParticleCanvas() {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 120) {
+          if (dist < 140) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.12 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - dist / 140)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -80,7 +84,7 @@ export function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-70 z-0"
+      className="absolute inset-0 pointer-events-none opacity-80 z-0 w-full h-full"
     />
   );
 }

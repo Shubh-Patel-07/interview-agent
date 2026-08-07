@@ -38,7 +38,7 @@ const PLANS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-28 relative bg-[#fafafa] text-slate-900 border-t border-slate-200/60">
+    <section id="pricing" className="py-24 relative text-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

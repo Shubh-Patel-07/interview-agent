@@ -12,13 +12,13 @@ import { ParticleCanvas } from '@/components/ui/ParticleCanvas';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 relative overflow-hidden bg-grid-pattern">
-      {/* Global Page-Wide Canvas & Ambient Lighting */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <ParticleCanvas />
-        <div className="glow-blue top-0 left-1/2 -translate-x-1/2 opacity-30 blur-3xl" />
-        <div className="glow-purple top-96 right-10 opacity-20 blur-3xl" />
-      </div>
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 relative bg-grid-pattern overflow-hidden">
+      {/* Full Document 100% Height Particle Canvas & Ambient Lighting */}
+      <ParticleCanvas />
+      
+      <div className="glow-blue top-0 left-1/2 -translate-x-1/2 opacity-35 blur-3xl pointer-events-none" />
+      <div className="glow-purple top-1/3 right-10 opacity-25 blur-3xl pointer-events-none" />
+      <div className="glow-blue top-2/3 left-10 opacity-25 blur-3xl pointer-events-none" />
 
       <Navbar />
       <main className="flex-grow relative z-10">
