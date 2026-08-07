@@ -45,7 +45,7 @@ const FEATURES = [
 
 export function Features() {
   return (
-    <section id="features" className="py-28 relative bg-white text-slate-900 border-t border-slate-200/60">
+    <section id="features" className="py-28 relative bg-[#f8fafc] text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -3,7 +3,7 @@ import { Bot, Code, Globe, Share2, Heart } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-white border-t border-slate-200/80 pt-16 pb-12 relative overflow-hidden text-slate-900">
+    <footer className="bg-[#f8fafc] border-t border-slate-200/80 pt-16 pb-12 relative overflow-hidden text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-200/60">
           {/* Col 1 */}
@@ -46,13 +46,13 @@ export function Footer() {
               Engineered using Next.js 16 App Router, Tailwind CSS, Supabase, and Google Gemini AI.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a href="#" className="p-2 rounded-lg bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-600 hover:text-blue-600 transition-colors" title="GitHub Codebase">
+              <a href="#" className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition-colors" title="GitHub Codebase">
                 <Code className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-600 hover:text-blue-600 transition-colors" title="Live Preview">
+              <a href="#" className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition-colors" title="Live Preview">
                 <Globe className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-600 hover:text-blue-600 transition-colors" title="Share SteerHire">
+              <a href="#" className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition-colors" title="Share SteerHire">
                 <Share2 className="w-4 h-4" />
               </a>
             </div>
