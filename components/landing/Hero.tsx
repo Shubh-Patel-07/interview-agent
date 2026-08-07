@@ -2,11 +2,15 @@
 
 import Link from 'next/link';
 import { AiOrb } from '@/components/ui/AiOrb';
+import { ParticleCanvas } from '@/components/ui/ParticleCanvas';
 import { ArrowRight, Sparkles, CheckCircle2, Play, Bot, Cpu, ShieldCheck, Award } from 'lucide-react';
 
 export function Hero() {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid-pattern bg-[#f8fafc]">
+      {/* 60 FPS Neural Particle Canvas */}
+      <ParticleCanvas />
+
       {/* Soft Ambient Background Glows */}
       <div className="glow-blue top-10 left-1/2 -translate-x-1/2 opacity-60 blur-3xl pointer-events-none" />
       <div className="glow-purple top-40 right-10 opacity-40 blur-3xl pointer-events-none" />
@@ -21,7 +25,7 @@ export function Hero() {
         </div>
 
         {/* 3D AI Assistant Orb Display */}
-        <div className="mb-8 flex justify-center">
+        <div className="mb-8 flex justify-center relative z-10">
           <AiOrb isSpeaking={true} size="md" />
         </div>
 
