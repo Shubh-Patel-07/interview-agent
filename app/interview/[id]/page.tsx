@@ -3,10 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAudioRecorder } from '@/hooks/use-audio-recorder';
+import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 import { InterviewService } from '@/services/interview-service';
 import { ResumeService } from '@/services/resume-service';
-import { InterviewConfig, InterviewQuestion } from '@/types';
-import { Bot, Mic, MicOff, Send, Clock, Sparkles, CheckCircle2, ArrowRight, ShieldAlert, User, Volume2, RefreshCw } from 'lucide-react';
+import { InterviewConfig } from '@/types';
+import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw } from 'lucide-react';
 
 export default function LiveInterviewPage() {
   const params = useParams();
@@ -21,7 +22,8 @@ export default function LiveInterviewPage() {
   const [isFinishing, setIsFinishing] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { isRecording, transcript, audioSupported, startRecording, stopRecording, resetTranscript } = useAudioRecorder();
+  const { isRecording, transcript, startRecording, stopRecording, resetTranscript } = useAudioRecorder();
+  const { isSpeaking, isMuted, speak, stop, toggleMute } = useSpeechSynthesis();
 
   useEffect(() => {
     if (transcript) {
@@ -45,6 +47,9 @@ export default function LiveInterviewPage() {
     // Initial greeting question from AI Interviewer
     const initialQuestion = `Hello Alex! I'm your AI Interviewer today. We're conducting a ${current.difficulty} ${current.interview_type} interview for the ${current.job_role} position. Let's start with your background: Could you walk me through an architecture decision you made recently that you're most proud of?`;
     setMessages([{ role: 'ai', content: initialQuestion }]);
+    
+    // Auto speak initial question
+    speak(initialQuestion);
   }, [interviewId]);
 
   useEffect(() => {
@@ -55,6 +60,9 @@ export default function LiveInterviewPage() {
     if (e) e.preventDefault();
     const textToSubmit = inputAnswer.trim();
     if (!textToSubmit || loading) return;
+
+    // Stop speaking if candidate submits
+    stop();
 
     // Append user response
     const updatedMessages = [...messages, { role: 'user' as const, content: textToSubmit }];
@@ -79,6 +87,9 @@ export default function LiveInterviewPage() {
       const data = await res.json();
       setMessages([...updatedMessages, { role: 'ai' as const, content: data.reply }]);
       setQuestionCount((prev) => prev + 1);
+
+      // Auto speak new AI interviewer question
+      speak(data.reply);
     } catch (err) {
       console.error('Error getting next question:', err);
     } finally {
@@ -87,6 +98,7 @@ export default function LiveInterviewPage() {
   };
 
   const handleFinishInterview = async () => {
+    stop();
     setIsFinishing(true);
 
     try {
@@ -120,7 +132,6 @@ export default function LiveInterviewPage() {
 
       InterviewService.saveLocalReport(fullReport);
 
-      // Save score back to interview config
       if (config) {
         InterviewService.saveLocalInterview({
           ...config,
@@ -143,8 +154,11 @@ export default function LiveInterviewPage() {
       {/* Top Header Bar */}
       <header className="sticky top-0 z-40 bg-[#05070d]/90 backdrop-blur-md border-b border-white/10 py-3.5 px-4 sm:px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center relative">
             <Bot className="w-4 h-4 text-purple-400" />
+            {isSpeaking && (
+              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 animate-ping" />
+            )}
           </div>
           <div>
             <h1 className="text-sm font-bold text-white flex items-center gap-2">
@@ -153,11 +167,32 @@ export default function LiveInterviewPage() {
                 {config?.difficulty}
               </span>
             </h1>
-            <p className="text-[11px] text-slate-400">Probing Question #{questionCount}</p>
+            <p className="text-[11px] text-slate-400 flex items-center gap-2">
+              Probing Question #{questionCount}
+              {isSpeaking && (
+                <span className="text-cyan-400 font-mono text-[10px] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" /> Speaking Out Loud...
+                </span>
+              )}
+            </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Mute/Unmute Voice Audio Output */}
+          <button
+            onClick={toggleMute}
+            className={`p-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+              isMuted
+                ? 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
+                : 'bg-purple-500/10 border-purple-500/30 text-purple-300'
+            }`}
+            title={isMuted ? 'Unmute AI Voice' : 'Mute AI Voice'}
+          >
+            {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-purple-400" />}
+            <span className="hidden sm:inline">{isMuted ? 'Voice Off' : 'Voice On'}</span>
+          </button>
+
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-slate-300">
             <Clock className="w-3.5 h-3.5 text-purple-400" />
             <span>Time Left: {config?.duration_minutes || 30}:00</span>
@@ -208,8 +243,12 @@ export default function LiveInterviewPage() {
                     )}
                   </span>
                   {msg.role === 'ai' && (
-                    <button className="text-slate-400 hover:text-white p-1" title="Read Aloud">
-                      <Volume2 className="w-3.5 h-3.5" />
+                    <button
+                      onClick={() => speak(msg.content)}
+                      className="text-slate-400 hover:text-white p-1 transition-colors"
+                      title="Replay Voice Speech"
+                    >
+                      <Volume2 className="w-3.5 h-3.5 text-purple-400" />
                     </button>
                   )}
                 </div>
