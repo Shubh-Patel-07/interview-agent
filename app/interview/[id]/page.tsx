@@ -7,7 +7,7 @@ import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 import { InterviewService } from '@/services/interview-service';
 import { ResumeService } from '@/services/resume-service';
 import { InterviewConfig } from '@/types';
-import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw, Activity, Command } from 'lucide-react';
+import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw, Activity } from 'lucide-react';
 
 export default function LiveInterviewPage() {
   const params = useParams();
@@ -145,30 +145,30 @@ export default function LiveInterviewPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#05070d] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
       {/* Top Header Bar */}
-      <header className="sticky top-0 z-40 bg-[#05070d]/90 backdrop-blur-md border-b border-white/10 py-3.5 px-4 sm:px-8 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 py-3.5 px-4 sm:px-8 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 p-[1px] relative">
-            <div className="w-full h-full bg-[#07090e] rounded-[10px] flex items-center justify-center">
-              <Bot className="w-5 h-5 text-indigo-400" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 p-[1px] relative">
+            <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
+              <Bot className="w-5 h-5 text-blue-400" />
             </div>
             {isSpeaking && (
-              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 animate-ping" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-blue-500 animate-ping" />
             )}
           </div>
           <div>
-            <h1 className="text-sm font-bold text-white flex items-center gap-2">
+            <h1 className="text-sm font-bold text-slate-900 flex items-center gap-2">
               {config?.job_role} Interview
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 font-bold">
                 {config?.difficulty}
               </span>
             </h1>
-            <p className="text-[11px] text-slate-400 flex items-center gap-2">
+            <p className="text-[11px] text-slate-500 flex items-center gap-2 font-medium">
               Probing Question #{questionCount}
               {isSpeaking && (
-                <span className="text-cyan-400 font-mono text-[10px] flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" /> Speaking Out Loud...
+                <span className="text-blue-600 font-mono text-[10px] flex items-center gap-1 font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" /> Speaking Out Loud...
                 </span>
               )}
             </p>
@@ -177,33 +177,33 @@ export default function LiveInterviewPage() {
 
         {/* Live Audio & Confidence Meter */}
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-emerald-400">
-            <Activity className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-emerald-600">
+            <Activity className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
             <span>Confidence: 91%</span>
           </div>
 
           <button
             onClick={toggleMute}
-            className={`p-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+            className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-colors ${
               isMuted
-                ? 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
-                : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-300'
+                ? 'bg-slate-100 border-slate-200 text-slate-500 hover:text-slate-900'
+                : 'bg-blue-50 border-blue-200 text-blue-600'
             }`}
             title={isMuted ? 'Unmute AI Voice' : 'Mute AI Voice'}
           >
-            {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-indigo-400" />}
+            {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-blue-600" />}
             <span className="hidden sm:inline">{isMuted ? 'Voice Off' : 'Voice On'}</span>
           </button>
 
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-slate-300">
-            <Clock className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono font-bold text-slate-700">
+            <Clock className="w-3.5 h-3.5 text-blue-600" />
             <span>Time Left: {config?.duration_minutes || 30}:00</span>
           </div>
 
           <button
             onClick={handleFinishInterview}
             disabled={isFinishing}
-            className="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100 text-xs font-bold flex items-center gap-1.5 transition-colors disabled:opacity-50"
           >
             {isFinishing ? 'Evaluating...' : 'End & Generate Report'}
           </button>
@@ -220,37 +220,39 @@ export default function LiveInterviewPage() {
               className={`flex gap-3 items-start ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.role === 'ai' && (
-                <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center shrink-0 mt-1">
-                  <Bot className="w-4 h-4 text-indigo-400" />
+                <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0 mt-1">
+                  <Bot className="w-4 h-4 text-blue-600" />
                 </div>
               )}
 
               <div
-                className={`max-w-2xl p-5 rounded-2xl text-sm leading-relaxed ${
+                className={`max-w-2xl p-5 rounded-2xl text-sm leading-relaxed font-medium ${
                   msg.role === 'ai'
-                    ? 'glass-card border-indigo-500/20 text-slate-200 rounded-tl-none shadow-lg'
-                    : 'bg-slate-800/90 border border-white/10 text-slate-100 rounded-tr-none'
+                    ? 'glass-card border-slate-200/80 bg-white text-slate-800 rounded-tl-none shadow-sm'
+                    : 'bg-slate-900 text-white rounded-tr-none shadow-md'
                 }`}
               >
                 <div className="flex items-center justify-between gap-4 mb-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                  <span className={`text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                    msg.role === 'ai' ? 'text-blue-600' : 'text-blue-300'
+                  }`}>
                     {msg.role === 'ai' ? (
                       <>
-                        <Sparkles className="w-3 h-3 text-indigo-400" /> SteerHire AI Interviewer
+                        <Sparkles className="w-3 h-3 text-blue-600" /> SteerHire AI Interviewer
                       </>
                     ) : (
                       <>
-                        <User className="w-3 h-3 text-cyan-400" /> Candidate Answer
+                        <User className="w-3 h-3 text-cyan-300" /> Candidate Answer
                       </>
                     )}
                   </span>
                   {msg.role === 'ai' && (
                     <button
                       onClick={() => speak(msg.content)}
-                      className="text-slate-400 hover:text-white p-1 transition-colors"
+                      className="text-slate-400 hover:text-slate-900 p-1 transition-colors"
                       title="Replay Voice Speech"
                     >
-                      <Volume2 className="w-3.5 h-3.5 text-indigo-400" />
+                      <Volume2 className="w-3.5 h-3.5 text-blue-600" />
                     </button>
                   )}
                 </div>
@@ -258,8 +260,8 @@ export default function LiveInterviewPage() {
               </div>
 
               {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center shrink-0 mt-1">
-                  <User className="w-4 h-4 text-cyan-400" />
+                <div className="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center shrink-0 mt-1 shadow-sm">
+                  <User className="w-4 h-4 text-blue-400" />
                 </div>
               )}
             </div>
@@ -267,10 +269,10 @@ export default function LiveInterviewPage() {
 
           {loading && (
             <div className="flex gap-3 items-start">
-              <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
-                <Bot className="w-4 h-4 text-indigo-400 animate-spin" />
+              <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                <Bot className="w-4 h-4 text-blue-600 animate-spin" />
               </div>
-              <div className="glass-card p-4 rounded-2xl rounded-tl-none border-indigo-500/20 text-xs text-indigo-300 flex items-center gap-2">
+              <div className="glass-card p-4 rounded-2xl rounded-tl-none border-blue-200 bg-white text-xs text-blue-600 font-bold flex items-center gap-2 shadow-sm">
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" /> SteerHire AI analyzing response & probing architecture...
               </div>
             </div>
@@ -279,8 +281,8 @@ export default function LiveInterviewPage() {
           <div ref={chatEndRef} />
         </div>
 
-        {/* Input Bar with Keyboard Shortcuts */}
-        <div className="glass-card p-4 rounded-2xl border border-white/10 relative">
+        {/* Input Bar */}
+        <div className="glass-card p-4 rounded-3xl border border-slate-200/80 bg-white shadow-lg relative">
           <form onSubmit={handleSubmitAnswer} className="flex items-center gap-3">
             <input
               type="text"
@@ -292,7 +294,7 @@ export default function LiveInterviewPage() {
                 }
               }}
               placeholder="Type your answer (Ctrl+Enter to send)..."
-              className="flex-grow glass-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500"
+              className="flex-grow bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 font-medium outline-none transition-all"
             />
 
             <button
@@ -300,8 +302,8 @@ export default function LiveInterviewPage() {
               onClick={isRecording ? stopRecording : startRecording}
               className={`p-3 rounded-xl border transition-all ${
                 isRecording
-                  ? 'bg-rose-500/20 border-rose-500 text-rose-400 animate-pulse'
-                  : 'bg-slate-800 border-white/10 text-slate-300 hover:text-white'
+                  ? 'bg-rose-50 border-rose-200 text-rose-600 animate-pulse'
+                  : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900'
               }`}
               title={isRecording ? 'Stop Recording' : 'Start Voice Input'}
             >
@@ -311,15 +313,15 @@ export default function LiveInterviewPage() {
             <button
               type="submit"
               disabled={!inputAnswer.trim() || loading}
-              className="px-5 py-3 rounded-xl gradient-button text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-indigo-500/20 disabled:opacity-50"
+              className="px-5 py-3 rounded-xl gradient-button text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
             >
               Send <Send className="w-4 h-4" />
             </button>
           </form>
 
           {isRecording && (
-            <p className="text-[11px] text-rose-400 mt-2 flex items-center gap-1.5 font-mono">
-              <span className="w-2 h-2 rounded-full bg-rose-400 animate-ping" />
+            <p className="text-[11px] text-rose-600 mt-2 flex items-center gap-1.5 font-mono font-bold">
+              <span className="w-2 h-2 rounded-full bg-rose-600 animate-ping" />
               Recording live speech... speak clearly.
             </p>
           )}

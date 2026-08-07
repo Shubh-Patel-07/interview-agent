@@ -45,7 +45,7 @@ export function AiOrb({ isSpeaking = false, size = 'md' }: AiOrbProps) {
         <div className="absolute top-1 left-3 w-1/2 h-1/3 bg-white/20 rounded-full blur-sm pointer-events-none" />
 
         {/* Central Core Icon */}
-        <div className="w-full h-full rounded-full bg-[#05070d]/80 backdrop-blur-md flex items-center justify-center relative">
+        <div className="w-full h-full rounded-full bg-slate-950/90 backdrop-blur-md flex items-center justify-center relative">
           <Bot className={`${iconSizes} text-blue-400 transition-transform duration-300 ${isSpeaking ? 'scale-110 text-cyan-300' : ''}`} />
           {isSpeaking && (
             <Sparkles className="w-4 h-4 text-cyan-300 absolute top-2 right-2 animate-ping" />
