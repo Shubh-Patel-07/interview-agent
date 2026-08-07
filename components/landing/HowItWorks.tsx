@@ -1,4 +1,4 @@
-import { Upload, MessageSquare, Award, ArrowRight } from 'lucide-react';
+import { Upload, MessageSquare, Award } from 'lucide-react';
 
 const STEPS = [
   {
@@ -23,16 +23,16 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 relative bg-[#07090e] border-y border-white/5">
+    <section id="how-it-works" className="py-24 relative bg-[#f8fafc] text-slate-900 border-y border-slate-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
             Simple 3-Step Process
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mt-4">
             How The Interview Agent Works
           </h2>
-          <p className="mt-4 text-slate-400 text-base sm:text-lg">
+          <p className="mt-4 text-slate-500 text-base sm:text-lg font-normal">
             From PDF upload to comprehensive interview evaluation in less than 15 minutes.
           </p>
         </div>
@@ -41,15 +41,17 @@ export function HowItWorks() {
           {STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={index} className="relative glass-card p-8 rounded-2xl border border-white/10 flex flex-col">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-purple-400" />
+              <div key={index} className="relative glass-card glass-card-hover p-8 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between shadow-sm">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <span className="text-4xl font-black text-slate-200 font-mono">{step.num}</span>
                   </div>
-                  <span className="text-4xl font-extrabold text-white/20 font-mono">{step.num}</span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed font-normal">{step.description}</p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
               </div>
             );
           })}

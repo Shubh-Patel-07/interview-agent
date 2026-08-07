@@ -1,167 +1,142 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { DashboardHeader } from '@/components/shared/DashboardHeader';
 import { ResumeService } from '@/services/resume-service';
-import { ResumeData } from '@/types';
-import { Upload, FileText, CheckCircle2, Sparkles, AlertCircle, ArrowRight, RefreshCw } from 'lucide-react';
+import { FileText, Upload, CheckCircle2, AlertCircle, Sparkles, Cpu, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-export default function ResumeUploadPage() {
-  const router = useRouter();
-  const [activeResume, setActiveResume] = useState<ResumeData | null>(null);
+export default function ResumePage() {
+  const [resume, setResume] = useState<any>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [dragActive, setDragActive] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   useEffect(() => {
-    const res = ResumeService.getActiveResume();
-    setActiveResume(res);
+    const active = ResumeService.getActiveResume();
+    setResume(active);
   }, []);
 
-  const handleSimulatedUpload = (file: File) => {
-    setIsUploading(true);
-    setUploadSuccess(false);
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
+    setIsUploading(true);
     setTimeout(() => {
-      const newResume: ResumeData = {
+      const mockParsedResume = {
         id: `res-${Date.now()}`,
-        user_id: 'user-demo-1',
         file_name: file.name,
-        file_url: '#',
         parsed_data: {
-          skills: ['TypeScript', 'Next.js 15', 'React 19', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'AI Engineering'],
-          experience_years: 3,
-          summary: `Extracted from ${file.name}: Experienced software engineer specialized in full-stack architecture, microservices, and AI SaaS integrations.`,
-          top_roles: ['Full Stack Dev @ TechCorp', 'Frontend Specialist @ WebFlow'],
-          projects: ['AI Interview Agent SaaS', 'High-throughput Cloud Storage Gateway'],
-          education: ['B.S. Computer Science'],
+          skills: ['TypeScript', 'React 19', 'Next.js 15', 'Node.js', 'PostgreSQL', 'TailwindCSS', 'System Design'],
+          summary: 'Experienced Full Stack Software Engineer with deep expertise in building scalable cloud web applications, microservices, and reactive user interfaces.',
+          detected_role: 'Full Stack Engineer',
+          detected_experience: 'Mid-Level (2-5 yrs)',
         },
-        created_at: new Date().toISOString(),
+        uploaded_at: new Date().toISOString(),
       };
 
-      ResumeService.setActiveResume(newResume);
-      setActiveResume(newResume);
+      ResumeService.setActiveResume(mockParsedResume as any);
+      setResume(mockParsedResume);
       setIsUploading(false);
       setUploadSuccess(true);
+      setTimeout(() => setUploadSuccess(false), 4000);
     }, 1200);
   };
 
-  const handleFileDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleSimulatedUpload(e.dataTransfer.files[0]);
-    }
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#05070d] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
       <DashboardHeader />
 
       <main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
-            Step 1 of Setup
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+            Candidate Intelligence
           </span>
-          <h1 className="text-3xl font-extrabold text-white mt-3">Resume Upload & Parsing</h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Upload your candidate PDF resume to automatically personalize AI interview questions for your background.
+          <h1 className="text-3xl font-black text-slate-900 mt-3 flex items-center gap-3">
+            <FileText className="w-7 h-7 text-blue-600" /> Resume Context Profile
+          </h1>
+          <p className="text-sm text-slate-500 mt-1 font-normal">
+            Upload your PDF resume. Our AI parser extracts key tech stacks to craft questions tailored to your experience.
           </p>
         </div>
 
+        {uploadSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-3"
+          >
+            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+            Resume parsed successfully! Questions will now probe your extracted skills.
+          </motion.div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* File Drag Drop Zone */}
-          <div className="glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+          {/* Upload Dropzone */}
+          <div className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between space-y-6 shadow-sm">
             <div>
-              <h2 className="text-lg font-bold text-white mb-2">Upload Resume PDF</h2>
-              <p className="text-xs text-slate-400 mb-6">
-                Supports PDF format up to 10MB. Text will be parsed automatically.
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Upload Resume PDF</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                Supported formats: .PDF, .DOCX (Max 10MB).
               </p>
 
-              <div
-                onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
-                onDragLeave={() => setDragActive(false)}
-                onDrop={handleFileDrop}
-                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${
-                  dragActive
-                    ? 'border-purple-500 bg-purple-500/10'
-                    : 'border-white/10 bg-slate-900/40 hover:border-purple-500/50'
-                }`}
-              >
-                <div className="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
-                  {isUploading ? (
-                    <RefreshCw className="w-6 h-6 text-purple-400 animate-spin" />
-                  ) : (
-                    <Upload className="w-6 h-6 text-purple-400" />
-                  )}
-                </div>
-
-                <p className="text-sm font-semibold text-white">
-                  {isUploading ? 'Parsing Resume PDF...' : 'Drag & Drop PDF here'}
-                </p>
-                <p className="text-xs text-slate-400 mt-1">or click to browse local files</p>
-
+              <label className="mt-6 border-2 border-dashed border-slate-300 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-blue-500 hover:bg-slate-50 transition-all group">
+                <Upload className="w-8 h-8 text-blue-600 mb-3 group-hover:scale-110 transition-transform" />
+                <span className="text-xs font-bold text-slate-800">
+                  {isUploading ? 'Parsing Resume PDF...' : 'Click to Browse or Drag PDF File'}
+                </span>
+                <span className="text-[11px] text-slate-400 mt-1">Automatic skill extraction</span>
                 <input
                   type="file"
-                  accept=".pdf"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files[0]) {
-                      handleSimulatedUpload(e.target.files[0]);
-                    }
-                  }}
+                  accept=".pdf,.docx"
+                  onChange={handleFileUpload}
                   className="hidden"
-                  id="resume-file-input"
+                  disabled={isUploading}
                 />
-                <label
-                  htmlFor="resume-file-input"
-                  className="inline-block mt-4 px-4 py-2 rounded-xl bg-purple-500/20 text-purple-300 text-xs font-semibold border border-purple-500/30 cursor-pointer hover:bg-purple-500/30 transition-colors"
-                >
-                  Browse Computer
-                </label>
-              </div>
+              </label>
             </div>
 
-            {uploadSuccess && (
-              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0" /> Resume parsed successfully! Personalization ready.
-              </div>
-            )}
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <Cpu className="w-4 h-4 text-blue-600" />
+              <span>AI Resume Parser Active</span>
+            </div>
           </div>
 
-          {/* Parsed Information Preview */}
-          <div className="glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+          {/* Active Parsed Profile Display */}
+          <div className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between space-y-6 shadow-sm">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-purple-400" /> Parsed Intelligence
-                </h2>
-                <span className="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono">
-                  Active Profile
-                </span>
+                <h3 className="text-lg font-bold text-slate-900">Extracted Candidate Profile</h3>
+                {resume && (
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 font-mono font-bold">
+                    Active
+                  </span>
+                )}
               </div>
 
-              {activeResume ? (
-                <div className="space-y-4 text-xs">
+              {resume ? (
+                <div className="space-y-4 font-sans text-xs">
                   <div>
-                    <span className="text-slate-400 block mb-1 font-mono uppercase text-[10px]">File Name</span>
-                    <p className="font-semibold text-white flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-purple-400" /> {activeResume.file_name}
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1 font-mono">File Name</span>
+                    <p className="font-bold text-slate-900">{resume.file_name}</p>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1 font-mono">Detected Role & Domain</span>
+                    <p className="font-bold text-blue-600">{resume.parsed_data.detected_role} ({resume.parsed_data.detected_experience})</p>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1 font-mono">Summary</span>
+                    <p className="text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200 font-medium">
+                      {resume.parsed_data.summary}
                     </p>
                   </div>
 
                   <div>
-                    <span className="text-slate-400 block mb-1 font-mono uppercase text-[10px]">Summary</span>
-                    <p className="text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-white/5">
-                      {activeResume.parsed_data?.summary}
-                    </p>
-                  </div>
-
-                  <div>
-                    <span className="text-slate-400 block mb-2 font-mono uppercase text-[10px]">Extracted Skills</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2 font-mono">Extracted Core Skill Matrix</span>
                     <div className="flex flex-wrap gap-1.5">
-                      {activeResume.parsed_data?.skills?.map((skill, i) => (
-                        <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 font-mono text-[11px]">
+                      {resume.parsed_data.skills.map((skill: string, i: number) => (
+                        <span key={i} className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 font-bold border border-blue-200 text-[11px]">
                           {skill}
                         </span>
                       ))}
@@ -169,16 +144,12 @@ export default function ResumeUploadPage() {
                   </div>
                 </div>
               ) : (
-                <p className="text-xs text-slate-500 py-12 text-center">No resume uploaded yet.</p>
+                <div className="py-12 text-center text-slate-400">
+                  <AlertCircle className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                  <p className="text-xs font-semibold">No resume uploaded yet</p>
+                </div>
               )}
             </div>
-
-            <button
-              onClick={() => router.push('/setup')}
-              className="w-full py-3.5 rounded-xl gradient-button text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20"
-            >
-              Proceed to Interview Setup <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
         </div>
       </main>

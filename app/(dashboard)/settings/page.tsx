@@ -2,117 +2,108 @@
 
 import { useState } from 'react';
 import { DashboardHeader } from '@/components/shared/DashboardHeader';
-import { User, Bell, Shield, Volume2, Save, CheckCircle2, Sparkles, Sliders } from 'lucide-react';
+import { Settings, Save, CheckCircle2, User, Bell, Volume2, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function SettingsPage() {
-  const [fullName, setFullName] = useState('Alex Dev');
-  const [email, setEmail] = useState('alex.dev@example.com');
-  const [voiceRate, setVoiceRate] = useState('1.0');
-  const [targetRole, setTargetRole] = useState('Full Stack Engineer');
+  const [candidateName, setCandidateName] = useState('Alex Dev');
+  const [email, setEmail] = useState('alex@dev.com');
+  const [voiceSpeed, setVoiceSpeed] = useState('1.0x');
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     setSavedSuccess(true);
-    setTimeout(() => setSavedSuccess(false), 2500);
+    setTimeout(() => setSavedSuccess(false), 3000);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#05070d] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
       <DashboardHeader />
 
       <main className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
-            Account Preferences
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+            Candidate Preferences
           </span>
-          <h1 className="text-3xl font-extrabold text-white mt-3 flex items-center gap-3">
-            <Sliders className="w-7 h-7 text-indigo-400" /> Candidate Profile & Settings
+          <h1 className="text-3xl font-black text-slate-900 mt-3 flex items-center gap-3">
+            <Settings className="w-7 h-7 text-blue-600" /> Account & Agent Settings
           </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Manage your interview environment, speech synthesis speed, and default target roles.
+          <p className="text-sm text-slate-500 mt-1 font-normal">
+            Configure your candidate profile parameters and AI speech playback options.
           </p>
         </div>
 
         {savedSuccess && (
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0" /> Preferences saved successfully!
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-3"
+          >
+            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+            Candidate preferences updated!
+          </motion.div>
         )}
 
-        <form onSubmit={handleSave} className="glass-card p-8 rounded-3xl border border-white/10 space-y-8">
-          {/* Section 1: Candidate Identity */}
+        <form onSubmit={handleSave} className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white space-y-8 shadow-sm">
+          {/* Candidate Profile Info */}
           <div>
-            <h2 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-              <User className="w-4 h-4 text-indigo-400" /> Candidate Profile
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <User className="w-4 h-4 text-blue-600" /> Candidate Profile
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-slate-400 font-semibold uppercase mb-1.5">Full Name</label>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Full Name</label>
                 <input
                   type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full glass-input rounded-xl px-4 py-2.5"
+                  value={candidateName}
+                  onChange={(e) => setCandidateName(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl glass-input text-sm font-medium"
                 />
               </div>
               <div>
-                <label className="block text-slate-400 font-semibold uppercase mb-1.5">Email Address</label>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Email Address</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full glass-input rounded-xl px-4 py-2.5"
+                  className="w-full px-4 py-2.5 rounded-xl glass-input text-sm font-medium"
                 />
               </div>
             </div>
           </div>
 
-          {/* Section 2: AI Voice & Environment */}
-          <div className="pt-6 border-t border-white/10">
-            <h2 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-              <Volume2 className="w-4 h-4 text-purple-400" /> AI Speech Synthesis Voice Speed
-            </h2>
-            <div className="grid grid-cols-3 gap-3 text-xs">
-              {['0.8x (Slow)', '1.0x (Normal)', '1.2x (Fast)'].map((speed) => (
-                <button
-                  key={speed}
-                  type="button"
-                  onClick={() => setVoiceRate(speed)}
-                  className={`p-3 rounded-xl border font-semibold transition-all ${
-                    voiceRate === speed
-                      ? 'bg-purple-600/30 border-purple-500 text-white'
-                      : 'bg-slate-900/60 border-white/10 text-slate-400 hover:bg-slate-800'
-                  }`}
-                >
-                  {speed}
-                </button>
-              ))}
+          {/* Voice Output Options */}
+          <div className="pt-6 border-t border-slate-200/80">
+            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-blue-600" /> AI Voice Speech Settings
+            </h3>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 font-mono">Voice Playback Speed</label>
+              <div className="flex gap-3">
+                {['0.8x', '1.0x', '1.2x', '1.5x'].map((speed) => (
+                  <button
+                    key={speed}
+                    type="button"
+                    onClick={() => setVoiceSpeed(speed)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
+                      voiceSpeed === speed
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                    }`}
+                  >
+                    {speed}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Section 3: Target Role */}
-          <div className="pt-6 border-t border-white/10">
-            <h2 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-cyan-400" /> Default Target Interview Domain
-            </h2>
-            <select
-              value={targetRole}
-              onChange={(e) => setTargetRole(e.target.value)}
-              className="w-full glass-input rounded-xl px-4 py-3 text-xs text-white bg-[#0c101d]"
-            >
-              <option value="Full Stack Engineer">Full Stack Engineer</option>
-              <option value="Frontend Architecture">Frontend Architecture</option>
-              <option value="Backend System Architect">Backend System Architect</option>
-              <option value="AI / ML Engineer">AI / ML Engineer</option>
-            </select>
-          </div>
-
-          {/* Submit Action */}
-          <div className="pt-6 border-t border-white/10 flex justify-end">
+          {/* Save Action Bar */}
+          <div className="pt-6 border-t border-slate-200/80 flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 rounded-xl gradient-button text-white font-semibold text-xs flex items-center gap-2 shadow-lg shadow-indigo-500/20"
+              className="px-6 py-3 rounded-xl gradient-button text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-500/20"
             >
               <Save className="w-4 h-4" /> Save Preferences
             </button>
