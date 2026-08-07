@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { AiOrb } from '@/components/ui/AiOrb';
-import { ParticleCanvas } from '@/components/ui/ParticleCanvas';
-import { ArrowRight, Sparkles, CheckCircle2, Play, Bot, Cpu, ShieldCheck, Award } from 'lucide-react';
+import { ThreeDCanvasHero } from '@/components/ui/ThreeDCanvasHero';
+import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu } from 'lucide-react';
 
 export function Hero() {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid-pattern bg-[#f8fafc]">
-      {/* 60 FPS Neural Particle Canvas */}
-      <ParticleCanvas />
+      {/* Real 3D Canvas WebGL Mouse Parallax */}
+      <ThreeDCanvasHero />
 
       {/* Soft Ambient Background Glows */}
       <div className="glow-blue top-10 left-1/2 -translate-x-1/2 opacity-60 blur-3xl pointer-events-none" />
@@ -26,7 +26,7 @@ export function Hero() {
 
         {/* 3D AI Assistant Orb Display */}
         <div className="mb-8 flex justify-center relative z-10">
-          <AiOrb isSpeaking={true} size="md" />
+          <AiOrb isSpeaking={true} size="lg" />
         </div>
 
         {/* Main Headline */}
@@ -44,14 +44,14 @@ export function Hero() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/setup"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold text-white gradient-button flex items-center justify-center gap-3 shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-transform"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold text-white gradient-button flex items-center justify-center gap-3 shadow-xl shadow-blue-500/25 hover:scale-[1.02] transition-transform"
           >
             Start Free AI Session
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             href="/dashboard"
-            className="w-full sm:w-auto px-7 py-4 rounded-xl text-base font-semibold text-slate-700 glass-card glass-card-hover flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-7 py-4 rounded-xl text-base font-bold text-slate-700 glass-card glass-card-hover flex items-center justify-center gap-2"
           >
             <Play className="w-4 h-4 text-blue-600 fill-blue-600" />
             Candidate Portal
@@ -59,7 +59,7 @@ export function Hero() {
         </div>
 
         {/* Value Highlights */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-600">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-semibold text-slate-600">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
             <span>Resume Intelligence PDF Parsing</span>
@@ -74,7 +74,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* SaaS App Preview Card Mockup */}
+        {/* Apple-Style SaaS App Preview Card Mockup */}
         <div className="mt-16 relative max-w-5xl mx-auto">
           <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-2xl opacity-80" />
           
@@ -88,7 +88,7 @@ export function Hero() {
                 </div>
                 <span className="text-xs text-slate-500 font-mono">steerhire // live-interview-probe</span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 text-xs font-mono font-semibold">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs font-mono font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                 3D AI Voice Active
               </div>
@@ -107,12 +107,12 @@ export function Hero() {
 
               <div className="flex gap-3.5 items-start justify-end">
                 <div className="bg-slate-900 border border-slate-800 text-slate-100 p-4 rounded-2xl rounded-tr-none max-w-2xl shadow-md">
-                  <p className="text-xs font-semibold text-slate-400 mb-1">Candidate Answer (Voice-to-Text)</p>
-                  <p className="text-sm text-slate-200 leading-relaxed">
+                  <p className="text-xs font-bold text-slate-400 mb-1">Candidate Answer (Voice-to-Text)</p>
+                  <p className="text-sm text-slate-200 leading-relaxed font-medium">
                     "We used optimistic locking with database transactions in Supabase, combined with Redis queue fallback to guarantee idempotent processing during spike traffic."
                   </p>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
                   <Cpu className="w-5 h-5 text-blue-600" />
                 </div>
               </div>
@@ -120,11 +120,11 @@ export function Hero() {
 
             <div className="mt-6 pt-4 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
               <div className="flex items-center gap-4 font-medium">
-                <span>Technical Depth: <strong className="text-emerald-600 font-extrabold">94%</strong></span>
-                <span>Communication: <strong className="text-blue-600 font-extrabold">90%</strong></span>
-                <span>Confidence: <strong className="text-purple-600 font-extrabold">88%</strong></span>
+                <span>Technical Depth: <strong className="text-emerald-600 font-black">94%</strong></span>
+                <span>Communication: <strong className="text-blue-600 font-black">90%</strong></span>
+                <span>Confidence: <strong className="text-purple-600 font-black">88%</strong></span>
               </div>
-              <span className="text-blue-600 font-mono font-semibold">Generating adaptive follow-up...</span>
+              <span className="text-blue-600 font-mono font-bold">Generating adaptive follow-up...</span>
             </div>
           </div>
         </div>
