@@ -32,13 +32,13 @@ export function BentoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: idx * 0.1 }}
-      className={`glass-card glass-card-hover rounded-3xl p-8 border border-white/10 flex flex-col justify-between group overflow-hidden bg-slate-900/60 backdrop-blur-xl shadow-xl ${className}`}
+      className={`glass-card glass-card-hover rounded-3xl p-8 border border-slate-200/80 flex flex-col justify-between group overflow-hidden bg-white/90 shadow-sm ${className}`}
     >
       {header && <div className="mb-4">{header}</div>}
       <div>
-        {icon && <div className="mb-4 text-cyan-400 group-hover:scale-110 transition-transform">{icon}</div>}
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">{title}</h3>
-        <p className="text-xs text-slate-400 leading-relaxed font-normal">{description}</p>
+        {icon && <div className="mb-4 text-blue-600 group-hover:scale-110 transition-transform">{icon}</div>}
+        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{title}</h3>
+        <p className="text-xs text-slate-500 leading-relaxed font-normal">{description}</p>
       </div>
     </motion.div>
   );
