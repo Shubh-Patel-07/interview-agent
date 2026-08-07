@@ -10,11 +10,8 @@
   },
   "dependencies": {
     "@google/genai": "^2.16.0",
-    "@react-three/drei": "^10.7.8",
-    "@react-three/fiber": "^9.7.0",
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.2",
-    "@types/three": "^0.185.4",
     "ai": "^7.0.56",
     "clsx": "^2.1.1",
     "framer-motion": "^13.0.0",
@@ -24,8 +21,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "recharts": "^3.10.1",
-    "tailwind-merge": "^3.6.0",
-    "three": "^0.185.1"
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
