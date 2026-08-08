@@ -7,6 +7,8 @@ import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 import { InterviewService } from '@/services/interview-service';
 import { ResumeService } from '@/services/resume-service';
 import { InterviewConfig } from '@/types';
+import { AppleThreeDOrb } from '@/components/ui/AppleThreeDOrb';
+import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { Bot, Mic, MicOff, Send, Clock, Sparkles, User, Volume2, VolumeX, RefreshCw, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -238,6 +240,18 @@ export default function LiveInterviewPage() {
           </button>
         </div>
       </header>
+
+      {/* Center Stage 3D AI Orb Assistant Header */}
+      <div className="pt-6 pb-2 text-center flex flex-col items-center justify-center relative">
+        <div className="relative">
+          <AppleThreeDOrb isSpeaking={isSpeaking} size="sm" />
+          {(isSpeaking || isRecording) && (
+            <div className="mt-2 flex justify-center">
+              <AudioWaveform isActive={true} barCount={10} />
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Main Live Interview Chat Area */}
       <main className="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-between space-y-6 relative z-10">
