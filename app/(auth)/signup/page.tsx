@@ -23,7 +23,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-transparent text-slate-900 dark:text-white">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-transparent text-slate-900">
       <div className="glow-purple top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 blur-3xl pointer-events-none" />
 
       <motion.div
@@ -39,18 +39,18 @@ export default function SignupPage() {
                 <Bot className="w-5 h-5 text-blue-400" />
               </div>
             </div>
-            <span className="font-black text-2xl tracking-tight text-slate-900 dark:text-white">Steer<span className="gradient-text">Hire</span></span>
+            <span className="font-black text-2xl tracking-tight text-slate-900">Steer<span className="gradient-text">Hire</span></span>
           </Link>
-          <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Create Candidate Account</h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-normal">Start unlimited AI technical mock interview practice</p>
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">Create Candidate Account</h1>
+          <p className="text-xs text-slate-500 mt-1 font-normal">Start unlimited AI technical mock interview practice</p>
         </div>
 
-        <div className="glass-card p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 shadow-xl">
+        <div className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white/95 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 font-mono">Full Name</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Full Name</label>
               <div className="relative">
-                <User className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3" />
+                <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                 <input
                   type="text"
                   value={name}
@@ -62,9 +62,9 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 font-mono">Email Address</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Email Address</label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                 <input
                   type="email"
                   value={email}
@@ -76,9 +76,9 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 font-mono">Password</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Password</label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3" />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                 <input
                   type="password"
                   value={password}
@@ -104,10 +104,10 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-200/60 dark:border-slate-800 text-center">
-            <p className="text-xs text-slate-500 dark:text-slate-400 font-normal">
+          <div className="mt-6 pt-6 border-t border-slate-200/60 text-center">
+            <p className="text-xs text-slate-500 font-normal">
               Already have an account?{' '}
-              <Link href="/login" className="text-blue-600 dark:text-blue-400 font-bold hover:underline">
+              <Link href="/login" className="text-blue-600 font-bold hover:underline">
                 Sign In
               </Link>
             </p>

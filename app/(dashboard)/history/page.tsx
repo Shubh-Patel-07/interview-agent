@@ -16,19 +16,19 @@ export default function InterviewHistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-transparent text-slate-900 dark:text-white">
+    <div className="min-h-screen flex flex-col bg-transparent text-slate-900">
       <DashboardHeader />
 
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
               Mock History
             </span>
-            <h1 className="text-3xl font-black text-slate-900 dark:text-white mt-3 flex items-center gap-3">
-              <History className="w-7 h-7 text-blue-600 dark:text-blue-400" /> Past Interview Sessions
+            <h1 className="text-3xl font-black text-slate-900 mt-3 flex items-center gap-3">
+              <History className="w-7 h-7 text-blue-600" /> Past Interview Sessions
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal">
+            <p className="text-sm text-slate-500 mt-1 font-normal">
               Review all completed and in-progress AI mock interviews.
             </p>
           </div>

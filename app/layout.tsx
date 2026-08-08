@@ -33,27 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var saved = localStorage.getItem('steerhire-theme');
-                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (saved === 'dark' || (!saved && supportDarkMode)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body className={`${inter.className} min-h-full flex flex-col bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300 selection:bg-blue-500 selection:text-white relative bg-grid-pattern`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} h-full antialiased`}>
+      <body className={`${inter.className} min-h-full flex flex-col bg-[#fafafa] text-slate-900 selection:bg-blue-500 selection:text-white relative bg-grid-pattern`}>
         <ThemeProvider>
           {/* Global Page-Wide Interactive Blue Spotlight Cursor Illumination */}
           <Spotlight />
