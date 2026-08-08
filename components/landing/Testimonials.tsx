@@ -26,7 +26,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 relative bg-[#f8fafc] text-slate-900 border-t border-slate-200/60">
+    <section id="testimonials" className="py-24 relative text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -39,7 +39,7 @@ export function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {TESTIMONIALS.map((item, idx) => (
-            <div key={idx} className="glass-card glass-card-hover p-8 rounded-3xl border border-slate-200/80 bg-white flex flex-col justify-between shadow-sm">
+            <div key={idx} className="glass-card glass-card-hover p-8 rounded-3xl border border-slate-200/80 bg-white/90 flex flex-col justify-between shadow-sm">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex gap-1 text-amber-400">

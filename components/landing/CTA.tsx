@@ -3,9 +3,9 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 
 export function CTA() {
   return (
-    <section className="py-20 relative overflow-hidden bg-[#f8fafc] text-slate-900 border-t border-slate-200/60">
+    <section className="py-20 relative overflow-hidden text-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <div className="glass-card p-10 sm:p-16 rounded-3xl border border-blue-500/20 bg-white relative overflow-hidden shadow-xl">
+        <div className="glass-card p-10 sm:p-16 rounded-3xl border border-blue-500/20 bg-white/90 relative overflow-hidden shadow-xl">
           <div className="glow-blue -top-20 left-1/2 -translate-x-1/2 opacity-30 blur-3xl pointer-events-none" />
           
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-6">

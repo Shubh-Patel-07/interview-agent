@@ -30,7 +30,7 @@ export function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section className="py-24 relative bg-[#f8fafc] text-slate-900 border-t border-slate-200/60">
+    <section className="py-24 relative text-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -47,7 +47,7 @@ export function FAQ() {
             return (
               <div
                 key={idx}
-                className="glass-card rounded-3xl border border-slate-200/80 bg-white overflow-hidden transition-colors shadow-sm"
+                className="glass-card rounded-3xl border border-slate-200/80 bg-white/90 overflow-hidden transition-colors shadow-sm"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
