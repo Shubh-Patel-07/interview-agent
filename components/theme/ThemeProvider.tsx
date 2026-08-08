@@ -14,27 +14,23 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // 1. Check local storage
     const saved = localStorage.getItem('steerhire-theme') as Theme;
-    if (saved) {
+    if (saved === 'dark' || saved === 'light') {
       setThemeState(saved);
-      if (saved === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setThemeState('dark');
-      document.documentElement.classList.add('dark');
+      applyTheme(saved);
+    } else {
+      // 2. Check system preference
+      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = isSystemDark ? 'dark' : 'light';
+      setThemeState(initial);
+      applyTheme(initial);
     }
   }, []);
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    localStorage.setItem('steerhire-theme', newTheme);
+  const applyTheme = (newTheme: Theme) => {
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -42,8 +38,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem('steerhire-theme', newTheme);
+    applyTheme(newTheme);
+  };
+
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
   };
 
   return (

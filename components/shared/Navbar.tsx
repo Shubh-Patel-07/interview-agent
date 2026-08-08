@@ -23,8 +23,8 @@ export function Navbar() {
       <div
         className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-6 py-3 flex items-center justify-between ${
           scrolled
-            ? 'glass-card border-slate-200/90 shadow-xl bg-white/90 dark:bg-slate-900/90'
-            : 'glass-card border-slate-200/60 shadow-sm bg-white/70 dark:bg-slate-900/70'
+            ? 'glass-card border-slate-200/90 dark:border-slate-800 shadow-xl bg-white/90 dark:bg-slate-900/90'
+            : 'glass-card border-slate-200/60 dark:border-slate-800 shadow-sm bg-white/75 dark:bg-slate-900/75'
         }`}
       >
         {/* Brand Logo */}
@@ -55,7 +55,7 @@ export function Navbar() {
           </Link>
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action Buttons & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
           <button
             onClick={toggleTheme}

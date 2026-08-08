@@ -1,7 +1,6 @@
 'use client';
 
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import { useTheme } from '@/components/theme/ThemeProvider';
 
 const MOCK_CHART_DATA = [
   { date: 'Session 1', overall: 65, technical: 60, communication: 70 },
@@ -12,22 +11,19 @@ const MOCK_CHART_DATA = [
 ];
 
 export function PerformanceChart() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
-    <div className="glass-card p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 shadow-sm">
+    <div className="glass-card p-6 rounded-3xl border border-slate-200/80 bg-white/95 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">Score Progression Over Time</h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Historical candidate score trajectory across mock interviews</p>
+          <h3 className="text-base font-bold text-slate-900">Score Progression Over Time</h3>
+          <p className="text-xs text-slate-500">Historical candidate score trajectory across mock interviews</p>
         </div>
         <div className="flex items-center gap-4 text-xs">
-          <span className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-blue-400" /> Overall
+          <span className="flex items-center gap-1.5 text-blue-600 font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600" /> Overall
           </span>
-          <span className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400 font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-600 dark:bg-purple-400" /> Technical
+          <span className="flex items-center gap-1.5 text-purple-600 font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-purple-600" /> Technical
           </span>
         </div>
       </div>
@@ -45,17 +41,17 @@ export function PerformanceChart() {
                 <stop offset="95%" stopColor="#7c3aed" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(226, 232, 240, 0.8)'} />
-            <XAxis dataKey="date" stroke={isDark ? '#94a3b8' : '#64748b'} fontSize={11} tickLine={false} />
-            <YAxis stroke={isDark ? '#94a3b8' : '#64748b'} fontSize={11} domain={[40, 100]} tickLine={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(226, 232, 240, 0.8)" />
+            <XAxis dataKey="date" stroke="#64748b" fontSize={11} tickLine={false} />
+            <YAxis stroke="#64748b" fontSize={11} domain={[40, 100]} tickLine={false} />
             <Tooltip
               contentStyle={{
-                backgroundColor: isDark ? '#0f172a' : '#ffffff',
-                borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(226, 232, 240, 0.8)',
+                backgroundColor: '#ffffff',
+                borderColor: 'rgba(226, 232, 240, 0.8)',
                 borderRadius: '12px',
-                color: isDark ? '#f8fafc' : '#0f172a',
+                color: '#0f172a',
                 fontSize: '12px',
-                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.3)',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.08)',
               }}
             />
             <Area type="monotone" dataKey="overall" stroke="#2563eb" strokeWidth={3} fillOpacity={1} fill="url(#blueGlow)" />

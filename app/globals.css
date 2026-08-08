@@ -5,11 +5,11 @@
     --bg-page: #f8fafc;
     --text-main: #0f172a;
     --text-muted: #64748b;
-    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-bg: rgba(255, 255, 255, 0.95);
     --card-border: rgba(226, 232, 240, 0.9);
     --card-hover-bg: #ffffff;
-    --card-hover-border: rgba(37, 99, 235, 0.4);
-    --input-bg: rgba(248, 250, 252, 0.9);
+    --card-hover-border: rgba(37, 99, 235, 0.5);
+    --input-bg: rgba(255, 255, 255, 0.95);
     --input-border: rgba(203, 213, 225, 0.9);
   }
 
@@ -17,9 +17,9 @@
     --bg-page: #05070d;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --card-bg: rgba(15, 23, 42, 0.75);
+    --card-bg: rgba(15, 23, 42, 0.85);
     --card-border: rgba(255, 255, 255, 0.1);
-    --card-hover-bg: rgba(30, 41, 59, 0.9);
+    --card-hover-bg: rgba(30, 41, 59, 0.95);
     --card-hover-border: rgba(99, 102, 241, 0.5);
     --input-bg: rgba(15, 23, 42, 0.8);
     --input-border: rgba(255, 255, 255, 0.15);
@@ -40,7 +40,7 @@ body {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--card-border);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
   position: relative;
   overflow: hidden;
 }
@@ -73,8 +73,8 @@ body {
 .glass-card-hover:hover {
   background: var(--card-hover-bg);
   border-color: var(--card-hover-border);
-  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.18);
-  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.18);
+  transform: translateY(-3px) scale(1.003);
 }
 
 .glass-input {
@@ -114,8 +114,8 @@ body {
   background-size: 32px 32px;
   background-image: 
     radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 80%),
-    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+    linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
 }
 
 .dark .bg-grid-pattern {
