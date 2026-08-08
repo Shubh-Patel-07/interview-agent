@@ -30,13 +30,13 @@ export function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section className="py-24 relative text-slate-900">
+    <section className="py-24 relative text-slate-900 dark:text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 mt-4">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white mt-4">
             Everything You Need to Know About SteerHire
           </h2>
         </div>
@@ -47,20 +47,20 @@ export function FAQ() {
             return (
               <div
                 key={idx}
-                className="glass-card rounded-3xl border border-slate-200/80 bg-white/90 overflow-hidden transition-colors shadow-sm"
+                className="glass-card rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 overflow-hidden transition-colors shadow-sm"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-base hover:text-blue-600 transition-colors"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-white text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                    <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
                     {faq.question}
                   </span>
-                  <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 text-slate-400 dark:text-slate-500 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-blue-600 dark:text-blue-400' : ''}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-2 text-sm text-slate-500 leading-relaxed border-t border-slate-100 font-normal">
+                  <div className="px-6 pb-6 pt-2 text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 font-normal">
                     {faq.answer}
                   </div>
                 )}

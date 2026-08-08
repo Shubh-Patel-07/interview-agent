@@ -14,8 +14,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const saved = localStorage.getItem('steerhire-theme') as Theme;
     if (saved) {
       setThemeState(saved);
@@ -24,6 +26,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       } else {
         document.documentElement.classList.remove('dark');
       }
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setThemeState('dark');
+      document.documentElement.classList.add('dark');
     }
   }, []);
 

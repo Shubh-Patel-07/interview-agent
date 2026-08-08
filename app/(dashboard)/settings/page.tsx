@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { DashboardHeader } from '@/components/shared/DashboardHeader';
-import { Settings, Save, CheckCircle2, User, Bell, Volume2, Shield } from 'lucide-react';
+import { Settings, Save, CheckCircle2, User, Volume2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function SettingsPage() {
@@ -18,18 +18,18 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-transparent text-slate-900 dark:text-white">
       <DashboardHeader />
 
       <main className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
             Candidate Preferences
           </span>
-          <h1 className="text-3xl font-black text-slate-900 mt-3 flex items-center gap-3">
-            <Settings className="w-7 h-7 text-blue-600" /> Account & Agent Settings
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white mt-3 flex items-center gap-3">
+            <Settings className="w-7 h-7 text-blue-600 dark:text-blue-400" /> Account & Agent Settings
           </h1>
-          <p className="text-sm text-slate-500 mt-1 font-normal">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal">
             Configure your candidate profile parameters and AI speech playback options.
           </p>
         </div>
@@ -38,22 +38,22 @@ export default function SettingsPage() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-3"
+            className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-bold flex items-center gap-3"
           >
-            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             Candidate preferences updated!
           </motion.div>
         )}
 
-        <form onSubmit={handleSave} className="glass-card p-8 rounded-3xl border border-slate-200/80 bg-white space-y-8 shadow-sm">
+        <form onSubmit={handleSave} className="glass-card p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 space-y-8 shadow-sm">
           {/* Candidate Profile Info */}
           <div>
-            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <User className="w-4 h-4 text-blue-600" /> Candidate Profile
+            <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <User className="w-4 h-4 text-blue-600 dark:text-blue-400" /> Candidate Profile
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Full Name</label>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 font-mono">Full Name</label>
                 <input
                   type="text"
                   value={candidateName}
@@ -62,7 +62,7 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 font-mono">Email Address</label>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 font-mono">Email Address</label>
                 <input
                   type="email"
                   value={email}
@@ -74,12 +74,12 @@ export default function SettingsPage() {
           </div>
 
           {/* Voice Output Options */}
-          <div className="pt-6 border-t border-slate-200/80">
-            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <Volume2 className="w-4 h-4 text-blue-600" /> AI Voice Speech Settings
+          <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-blue-600 dark:text-blue-400" /> AI Voice Speech Settings
             </h3>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 font-mono">Voice Playback Speed</label>
+              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-mono">Voice Playback Speed</label>
               <div className="flex gap-3">
                 {['0.8x', '1.0x', '1.2x', '1.5x'].map((speed) => (
                   <button
@@ -89,7 +89,7 @@ export default function SettingsPage() {
                     className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
                       voiceSpeed === speed
                         ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                        : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
                     }`}
                   >
                     {speed}
@@ -100,7 +100,7 @@ export default function SettingsPage() {
           </div>
 
           {/* Save Action Bar */}
-          <div className="pt-6 border-t border-slate-200/80 flex justify-end">
+          <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800 flex justify-end">
             <button
               type="submit"
               className="px-6 py-3 rounded-xl gradient-button text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-500/20"
