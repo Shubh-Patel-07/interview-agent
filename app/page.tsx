@@ -8,14 +8,10 @@ import { Testimonials } from '@/components/landing/Testimonials';
 import { FAQ } from '@/components/landing/FAQ';
 import { CTA } from '@/components/landing/CTA';
 import { Footer } from '@/components/shared/Footer';
-import { ParticleCanvas } from '@/components/ui/ParticleCanvas';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 relative bg-grid-pattern overflow-hidden">
-      {/* Full Document 100% Height Particle Canvas & Ambient Lighting */}
-      <ParticleCanvas />
-      
+    <div className="min-h-screen flex flex-col bg-transparent text-slate-900 relative bg-grid-pattern overflow-hidden">
       <div className="glow-blue top-0 left-1/2 -translate-x-1/2 opacity-35 blur-3xl pointer-events-none" />
       <div className="glow-purple top-1/3 right-10 opacity-25 blur-3xl pointer-events-none" />
       <div className="glow-blue top-2/3 left-10 opacity-25 blur-3xl pointer-events-none" />

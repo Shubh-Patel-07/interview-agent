@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ParticleCanvas } from "@/components/ui/ParticleCanvas";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,9 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} h-full antialiased`}>
-      <body className={`${inter.className} min-h-full flex flex-col transition-colors duration-300 selection:bg-blue-500 selection:text-white`}>
+      <body className={`${inter.className} min-h-full flex flex-col bg-[#f8fafc] text-slate-900 transition-colors duration-300 selection:bg-blue-500 selection:text-white relative`}>
         <ThemeProvider>
-          {children}
+          {/* Global Page-Wide Particle Animation Canvas */}
+          <ParticleCanvas />
+          <div className="relative z-10 flex flex-col flex-grow">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
