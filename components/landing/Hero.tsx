@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { AppleThreeDOrb } from '@/components/ui/AppleThreeDOrb';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { Spotlight } from '@/components/ui/Spotlight';
-import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database, FileText, Activity, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Hero() {
   const [activeTab, setActiveTab] = useState<'voice' | 'architecture' | 'scorecard'>('voice');
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden text-slate-900">
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden text-slate-900">
       {/* Spotlight Interactive Cursor Tracking Illumination */}
       <Spotlight />
 
@@ -22,22 +22,83 @@ export function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-blue-200 text-xs text-blue-600 shadow-sm mb-6 backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-6 backdrop-blur-md"
         >
-          <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-spin" style={{ animationDuration: '8s' }} />
+          <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* Ultra-Sleek Apple/Siri Glowing AI Orb Assistant (No Floating Card Clutter) */}
+        {/* 3D Robot Assistant Entity Display with 4 Floating Feature Cards (Matching Reference Screenshot 1-to-1) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 flex justify-center relative z-10"
+          className="mb-6 flex justify-center relative z-10 max-w-2xl mx-auto items-center min-h-[260px]"
         >
+          {/* Card 1: Top-Left "Analyze Resume" */}
+          <motion.div
+            animate={{ y: [-4, 4, -4] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-4 sm:left-10 top-6 z-20"
+          >
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+              <FileText className="w-4 h-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-slate-800 leading-none">Analyze</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Resume</p>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Top-Right "Ask Questions" */}
+          <motion.div
+            animate={{ y: [4, -4, 4] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-4 sm:right-10 top-6 z-20"
+          >
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+              <Activity className="w-4 h-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-slate-800 leading-none">Ask</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
+            </div>
+          </motion.div>
+
+          {/* Center 3D Robot Assistant Entity */}
           <AppleThreeDOrb isSpeaking={true} size="md" />
+
+          {/* Card 3: Bottom-Left "Evaluate Skills" */}
+          <motion.div
+            animate={{ y: [3, -3, 3] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-0 sm:left-4 bottom-4 z-20"
+          >
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+              <Cpu className="w-4 h-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-slate-800 leading-none">Evaluate</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Skills</p>
+            </div>
+          </motion.div>
+
+          {/* Card 4: Bottom-Right "Deliver Feedback" */}
+          <motion.div
+            animate={{ y: [-3, 3, -3] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-0 sm:right-4 bottom-4 z-20"
+          >
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+              <Star className="w-4 h-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-slate-800 leading-none">Deliver</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Proportioned Headline */}
@@ -45,7 +106,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight"
+          className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight mt-2"
         >
           Your next interview <br className="hidden sm:inline" />
           <span className="gradient-text font-black">starts here.</span>
