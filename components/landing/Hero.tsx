@@ -2,14 +2,25 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { AppleThreeDOrb } from '@/components/ui/AppleThreeDOrb';
+import { AppleThreeDOrb, AIState } from '@/components/ui/AppleThreeDOrb';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { Spotlight } from '@/components/ui/Spotlight';
-import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database, FileText, Activity, Star } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database, FileText, Activity, Star, Volume2, Mic, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Hero() {
   const [activeTab, setActiveTab] = useState<'voice' | 'architecture' | 'scorecard'>('voice');
+  const [currentAiState, setCurrentAiState] = useState<AIState>('idle');
+
+  const STATE_LABELS: Record<AIState, { text: string; color: string; icon: any }> = {
+    idle: { text: 'SteerHire AI Agent Ready', color: 'text-blue-600 bg-blue-50 border-blue-200', icon: Bot },
+    thinking: { text: 'Thinking & Retrieving Probes...', color: 'text-purple-600 bg-purple-50 border-purple-200', icon: RefreshCw },
+    speaking: { text: 'Speaking Question Out Loud...', color: 'text-cyan-600 bg-cyan-50 border-cyan-200', icon: Volume2 },
+    listening: { text: 'Listening to Candidate Voice...', color: 'text-emerald-600 bg-emerald-50 border-emerald-200', icon: Mic },
+    evaluating: { text: 'Analyzing Response & Scoring...', color: 'text-amber-600 bg-amber-50 border-amber-200', icon: Sparkles },
+  };
+
+  const ActiveStateIcon = STATE_LABELS[currentAiState].icon;
 
   return (
     <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden text-slate-900">
@@ -17,12 +28,12 @@ export function Hero() {
       <Spotlight />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        {/* Top Announcement Badge (Matching Screenshot) */}
+        {/* Top Announcement Badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-8 backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-6 backdrop-blur-md"
         >
           <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
@@ -30,78 +41,107 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Centerpiece & 4 Floating Glass Feature Cards (1-to-1 Screenshot Match) */}
+        {/* 3D Robot Centerpiece & 4 Floating Glass Feature Cards */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8 flex justify-center relative z-10 max-w-2xl mx-auto items-center min-h-[260px]"
+          className="mb-6 flex flex-col items-center justify-center relative z-10 max-w-3xl mx-auto min-h-[300px]"
         >
-          {/* Card 1: Top-Left "Analyze Resume" */}
+          {/* Card 1: Top-Left "Resume Analysis" */}
           <motion.div
             animate={{ y: [-4, 4, -4] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute left-2 sm:left-12 top-6 z-20"
+            whileHover={{ scale: 1.06, y: -6 }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-2 sm:left-12 top-6 z-20 cursor-pointer"
           >
             <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
               <FileText className="w-4 h-4 text-purple-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Analyze</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Resume</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Resume</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Analysis</p>
             </div>
           </motion.div>
 
-          {/* Card 2: Top-Right "Ask Questions" */}
+          {/* Card 2: Top-Right "AI Interview" */}
           <motion.div
             animate={{ y: [4, -4, 4] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute right-2 sm:right-12 top-6 z-20"
+            whileHover={{ scale: 1.06, y: -6 }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-2 sm:right-12 top-6 z-20 cursor-pointer"
           >
             <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
               <Activity className="w-4 h-4 text-purple-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Ask</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">AI</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Interview</p>
             </div>
           </motion.div>
 
           {/* Center 3D Robot Assistant Entity */}
-          <AppleThreeDOrb isSpeaking={true} size="md" />
+          <AppleThreeDOrb aiState={currentAiState} isSpeaking={currentAiState === 'speaking'} size="md" />
 
-          {/* Card 3: Bottom-Left "Evaluate Skills" */}
+          {/* Dynamic AI State Indicator Badge */}
+          <div className="mt-2">
+            <span className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono font-bold shadow-sm ${STATE_LABELS[currentAiState].color}`}>
+              <ActiveStateIcon className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
+              <span>{STATE_LABELS[currentAiState].text}</span>
+            </span>
+          </div>
+
+          {/* Live AI State Switcher Bar */}
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5 bg-slate-100/90 p-1.5 rounded-xl border border-slate-200/80 shadow-sm backdrop-blur-md">
+            {(['idle', 'thinking', 'speaking', 'listening', 'evaluating'] as AIState[]).map((state) => (
+              <button
+                key={state}
+                onClick={() => setCurrentAiState(state)}
+                className={`px-3 py-1 rounded-lg text-[11px] font-bold uppercase font-mono tracking-wider transition-all ${
+                  currentAiState === state
+                    ? 'bg-white text-blue-600 shadow-sm border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                {state}
+              </button>
+            ))}
+          </div>
+
+          {/* Card 3: Bottom-Left "Skill Evaluation" */}
           <motion.div
             animate={{ y: [3, -3, 3] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute left-0 sm:left-6 bottom-4 z-20"
+            whileHover={{ scale: 1.06, y: -6 }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-0 sm:left-6 bottom-4 z-20 cursor-pointer"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Cpu className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Evaluate</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Skills</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Skill</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Evaluation</p>
             </div>
           </motion.div>
 
-          {/* Card 4: Bottom-Right "Deliver Feedback" */}
+          {/* Card 4: Bottom-Right "Smart Feedback" */}
           <motion.div
             animate={{ y: [-3, 3, -3] }}
             transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute right-0 sm:right-6 bottom-4 z-20"
+            whileHover={{ scale: 1.06, y: -6 }}
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-0 sm:right-6 bottom-4 z-20 cursor-pointer"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Star className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Deliver</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Smart</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Proportioned Headline (Matching Screenshot) */}
+        {/* Proportioned Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,7 +162,7 @@ export function Hero() {
           Practice under realistic technical interview conditions. SteerHire parses your PDF resume, probes your architecture trade-offs out loud, and delivers hiring decision scorecards.
         </motion.p>
 
-        {/* CTA Actions (Matching Screenshot) */}
+        {/* CTA Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
