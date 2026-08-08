@@ -173,7 +173,7 @@ export default function LiveInterviewPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-transparent text-slate-900">
       {/* Top Header Bar */}
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 py-3.5 px-4 sm:px-8 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
@@ -240,7 +240,7 @@ export default function LiveInterviewPage() {
       </header>
 
       {/* Main Live Interview Chat Area */}
-      <main className="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-between space-y-6">
+      <main className="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-between space-y-6 relative z-10">
         {/* Messages Stream Container */}
         <div className="flex-grow space-y-6 overflow-y-auto pr-2">
           {messages.map((msg, index) => (
@@ -261,18 +261,18 @@ export default function LiveInterviewPage() {
                 className={`max-w-2xl p-5 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'ai'
                     ? 'glass-card border-blue-500/20 text-slate-800 rounded-tl-none shadow-md bg-white'
-                    : 'bg-slate-900 border border-slate-800 text-slate-100 rounded-tr-none shadow-md'
+                    : 'bg-blue-600 border border-blue-600 text-white rounded-tr-none shadow-md shadow-blue-500/20'
                 }`}
               >
                 <div className="flex items-center justify-between gap-4 mb-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5 font-mono">
+                  <span className={`text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 font-mono ${msg.role === 'ai' ? 'text-slate-500' : 'text-blue-100'}`}>
                     {msg.role === 'ai' ? (
                       <>
                         <Sparkles className="w-3 h-3 text-blue-600" /> SteerHire AI Interviewer
                       </>
                     ) : (
                       <>
-                        <User className="w-3 h-3 text-cyan-400" /> Candidate Answer
+                        <User className="w-3 h-3 text-white" /> Candidate Answer
                       </>
                     )}
                   </span>
@@ -290,8 +290,8 @@ export default function LiveInterviewPage() {
               </div>
 
               {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 mt-1 shadow-sm">
-                  <User className="w-4 h-4 text-cyan-400" />
+                <div className="w-8 h-8 rounded-xl bg-blue-600 border border-blue-600 flex items-center justify-center shrink-0 mt-1 shadow-sm">
+                  <User className="w-4 h-4 text-white" />
                 </div>
               )}
             </motion.div>

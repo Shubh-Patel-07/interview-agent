@@ -163,14 +163,14 @@ export function Hero() {
                 </div>
 
                 <div className="flex gap-3.5 items-start justify-end">
-                  <div className="bg-slate-900 border border-slate-800 text-slate-100 p-4 rounded-2xl rounded-tr-none max-w-2xl shadow-md">
-                    <p className="text-xs font-bold text-slate-400 mb-1">Candidate Answer (Voice-to-Text)</p>
-                    <p className="text-sm text-slate-200 leading-relaxed font-medium">
+                  <div className="bg-blue-600 border border-blue-600 text-white p-4 rounded-2xl rounded-tr-none max-w-2xl shadow-md shadow-blue-500/20">
+                    <p className="text-xs font-bold text-blue-100 mb-1">Candidate Answer (Voice-to-Text)</p>
+                    <p className="text-sm text-white leading-relaxed font-medium">
                       "We used optimistic locking with database transactions in Supabase, combined with Redis queue fallback to guarantee idempotent processing during spike traffic."
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-                    <Cpu className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                    <Cpu className="w-5 h-5 text-white" />
                   </div>
                 </div>
               </div>
