@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { AppleThreeDOrb } from '@/components/ui/AppleThreeDOrb';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { Spotlight } from '@/components/ui/Spotlight';
-import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database, FileText, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Hero() {
@@ -30,14 +30,63 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D AI Assistant Orb Display */}
+        {/* 3D AI Assistant Orb Display with 4 Floating Feature Cards */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 flex justify-center relative z-10"
+          className="mb-8 flex justify-center relative z-10 max-w-xl mx-auto items-center"
         >
+          {/* Floating Feature Card 1 (Top-Left) */}
+          <motion.div
+            animate={{ y: [-4, 4, -4] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md text-xs font-bold text-slate-800 absolute -left-6 top-4 z-20"
+          >
+            <div className="w-6 h-6 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center">
+              <FileText className="w-3.5 h-3.5 text-blue-600" />
+            </div>
+            <span>Analyze Resume</span>
+          </motion.div>
+
+          {/* Floating Feature Card 2 (Top-Right) */}
+          <motion.div
+            animate={{ y: [4, -4, 4] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md text-xs font-bold text-slate-800 absolute -right-6 top-4 z-20"
+          >
+            <div className="w-6 h-6 rounded-lg bg-purple-50 border border-purple-200 flex items-center justify-center">
+              <HelpCircle className="w-3.5 h-3.5 text-purple-600" />
+            </div>
+            <span>Ask Questions</span>
+          </motion.div>
+
+          {/* 3D Apple AI Orb Assistant Visual */}
           <AppleThreeDOrb isSpeaking={true} size="md" />
+
+          {/* Floating Feature Card 3 (Bottom-Left) */}
+          <motion.div
+            animate={{ y: [3, -3, 3] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md text-xs font-bold text-slate-800 absolute -left-10 bottom-4 z-20"
+          >
+            <div className="w-6 h-6 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+              <Cpu className="w-3.5 h-3.5 text-emerald-600" />
+            </div>
+            <span>Evaluate Skills</span>
+          </motion.div>
+
+          {/* Floating Feature Card 4 (Bottom-Right) */}
+          <motion.div
+            animate={{ y: [-3, 3, -3] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md text-xs font-bold text-slate-800 absolute -right-10 bottom-4 z-20"
+          >
+            <div className="w-6 h-6 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            </div>
+            <span>Deliver Feedback</span>
+          </motion.div>
         </motion.div>
 
         {/* Proportioned Headline */}
