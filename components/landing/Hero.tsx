@@ -17,12 +17,12 @@ export function Hero() {
       <Spotlight />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        {/* Top Announcement Badge */}
+        {/* Top Announcement Badge (Matching Screenshot) */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-6 backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-8 backdrop-blur-md"
         >
           <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
@@ -30,24 +30,24 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Assistant Entity Display with 4 Floating Feature Cards (Matching Reference Screenshot 1-to-1) */}
+        {/* 3D Robot Centerpiece & 4 Floating Glass Feature Cards (1-to-1 Screenshot Match) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 flex justify-center relative z-10 max-w-2xl mx-auto items-center min-h-[260px]"
+          className="mb-8 flex justify-center relative z-10 max-w-2xl mx-auto items-center min-h-[260px]"
         >
           {/* Card 1: Top-Left "Analyze Resume" */}
           <motion.div
             animate={{ y: [-4, 4, -4] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-4 sm:left-10 top-6 z-20"
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute left-2 sm:left-12 top-6 z-20"
           >
             <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
               <FileText className="w-4 h-4 text-purple-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-800 leading-none">Analyze</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Analyze</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Resume</p>
             </div>
           </motion.div>
@@ -56,13 +56,13 @@ export function Hero() {
           <motion.div
             animate={{ y: [4, -4, 4] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-4 sm:right-10 top-6 z-20"
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute right-2 sm:right-12 top-6 z-20"
           >
             <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
               <Activity className="w-4 h-4 text-purple-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-800 leading-none">Ask</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Ask</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
             </div>
           </motion.div>
@@ -74,13 +74,13 @@ export function Hero() {
           <motion.div
             animate={{ y: [3, -3, 3] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute left-0 sm:left-4 bottom-4 z-20"
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute left-0 sm:left-6 bottom-4 z-20"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Cpu className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-800 leading-none">Evaluate</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Evaluate</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Skills</p>
             </div>
           </motion.div>
@@ -89,24 +89,24 @@ export function Hero() {
           <motion.div
             animate={{ y: [-3, 3, -3] }}
             transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/90 border border-slate-200/90 shadow-xl text-left absolute right-0 sm:right-4 bottom-4 z-20"
+            className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/85 border border-white/90 shadow-xl text-left absolute right-0 sm:right-6 bottom-4 z-20"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Star className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-800 leading-none">Deliver</p>
+              <p className="text-[11px] font-bold text-slate-900 leading-none">Deliver</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Proportioned Headline */}
+        {/* Proportioned Headline (Matching Screenshot) */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight mt-2"
+          className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.1] mt-2"
         >
           Your next interview <br className="hidden sm:inline" />
           <span className="gradient-text font-black">starts here.</span>
@@ -117,12 +117,12 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
+          className="mt-6 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal"
         >
           Practice under realistic technical interview conditions. SteerHire parses your PDF resume, probes your architecture trade-offs out loud, and delivers hiring decision scorecards.
         </motion.p>
 
-        {/* CTA Actions */}
+        {/* CTA Actions (Matching Screenshot) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
