@@ -21,7 +21,7 @@ export function Spotlight() {
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300 opacity-90 w-screen h-screen"
+      className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300 opacity-90 w-full h-full"
       style={{
         background: `radial-gradient(650px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(37, 99, 235, 0.15), transparent 45%)`,
       }}

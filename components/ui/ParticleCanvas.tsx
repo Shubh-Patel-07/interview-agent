@@ -30,7 +30,7 @@ export function ParticleCanvas() {
     window.addEventListener('mousemove', handleMouseMove);
 
     // Particle pool fixed to viewport for 100% continuous animation
-    const particleCount = 85;
+    const particleCount = Math.min(85, Math.floor(window.innerWidth / 15));
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -63,7 +63,6 @@ export function ParticleCanvas() {
 
       // Render & update particles with mouse repulsion
       particles.forEach((p) => {
-        // Mouse interaction
         const mdx = p.x - mouseX;
         const mdy = p.y - mouseY;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -100,7 +99,7 @@ export function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none opacity-90 z-0 w-screen h-screen"
+      className="fixed inset-0 pointer-events-none opacity-90 z-0 w-full h-full"
     />
   );
 }
