@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { AppleThreeDOrb } from '@/components/ui/AppleThreeDOrb';
 import { AudioWaveform } from '@/components/ui/AudioWaveform';
 import { Spotlight } from '@/components/ui/Spotlight';
-import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database, FileText, Activity, Star } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Play, Cpu, Bot, Layers, Database } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Hero() {
@@ -22,7 +22,7 @@ export function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-8 sm:mb-10 backdrop-blur-md relative z-20"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-6 backdrop-blur-md relative z-20"
         >
           <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
@@ -30,12 +30,12 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Assistant Entity Centerpiece (Clean & Uncluttered Centerstage) */}
+        {/* Photorealistic 3D Robot AI Assistant Centerstage (Apple / OpenAI Pure Minimalist Stage) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8 flex items-center justify-center relative z-10 max-w-xl mx-auto min-h-[280px]"
+          className="mb-6 flex items-center justify-center relative z-10 max-w-lg mx-auto min-h-[260px]"
         >
           <AppleThreeDOrb isSpeaking={true} size="md" />
         </motion.div>
@@ -60,34 +60,6 @@ export function Hero() {
         >
           Practice under realistic technical interview conditions. SteerHire parses your PDF resume, probes your architecture trade-offs out loud, and delivers hiring decision scorecards.
         </motion.p>
-
-        {/* 4 Feature Badges (Sleek Horizontal Glass Bar - Zero Overlap, Ultra-Clean) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-3 max-w-3xl mx-auto"
-        >
-          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
-            <FileText className="w-4 h-4 text-purple-600" />
-            <span className="text-xs font-bold text-slate-900">Analyze Resume</span>
-          </div>
-
-          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
-            <Activity className="w-4 h-4 text-purple-600" />
-            <span className="text-xs font-bold text-slate-900">Ask Questions</span>
-          </div>
-
-          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
-            <Cpu className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-bold text-slate-900">Evaluate Skills</span>
-          </div>
-
-          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
-            <Star className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-bold text-slate-900">Deliver Feedback</span>
-          </div>
-        </motion.div>
 
         {/* CTA Actions */}
         <motion.div
