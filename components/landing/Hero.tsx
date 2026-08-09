@@ -22,7 +22,7 @@ export function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-12 sm:mb-16 backdrop-blur-md relative z-20"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-8 sm:mb-10 backdrop-blur-md relative z-20"
         >
           <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
@@ -30,81 +30,14 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Assistant Entity Display (Clean Vertical Stacked Left/Right Wing Cards Layout) */}
+        {/* 3D Robot Assistant Entity Centerpiece (Clean & Uncluttered Centerstage) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12 relative z-10 max-w-5xl mx-auto flex items-center justify-center min-h-[380px] py-6"
+          className="mb-8 flex items-center justify-center relative z-10 max-w-xl mx-auto min-h-[280px]"
         >
-          {/* Card 1: TOP-LEFT "Analyze Resume" (Positioned UP ABOVE on Left Wing) */}
-          <motion.div
-            animate={{ y: [-6, 6, -6] }}
-            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.06, y: -8 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-8 top-2 z-20 whitespace-nowrap"
-          >
-            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
-              <FileText className="w-4 h-4 text-purple-600" />
-            </div>
-            <div className="whitespace-nowrap">
-              <p className="text-xs font-bold text-slate-900 leading-none">Analyze</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Resume</p>
-            </div>
-          </motion.div>
-
-          {/* Card 2: BOTTOM-LEFT "Evaluate Skills" (Positioned DOWN BELOW on Left Wing) */}
-          <motion.div
-            animate={{ y: [6, -6, 6] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.06, y: -8 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-8 bottom-2 z-20 whitespace-nowrap"
-          >
-            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-              <Cpu className="w-4 h-4 text-blue-600" />
-            </div>
-            <div className="whitespace-nowrap">
-              <p className="text-xs font-bold text-slate-900 leading-none">Evaluate</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Skills</p>
-            </div>
-          </motion.div>
-
-          {/* Center 3D Robot Assistant Entity */}
-          <div className="relative z-10 flex items-center justify-center px-16">
-            <AppleThreeDOrb isSpeaking={true} size="md" />
-          </div>
-
-          {/* Card 4: TOP-RIGHT "Deliver Feedback" (Positioned UP ABOVE on Right Wing) */}
-          <motion.div
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.06, y: -8 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-8 top-2 z-20 whitespace-nowrap"
-          >
-            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-              <Star className="w-4 h-4 text-blue-600" />
-            </div>
-            <div className="whitespace-nowrap">
-              <p className="text-xs font-bold text-slate-900 leading-none">Deliver</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
-            </div>
-          </motion.div>
-
-          {/* Card 3: BOTTOM-RIGHT "Ask Questions" (Positioned DOWN BELOW on Right Wing) */}
-          <motion.div
-            animate={{ y: [5, -5, 5] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.06, y: -8 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-8 bottom-2 z-20 whitespace-nowrap"
-          >
-            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
-              <Activity className="w-4 h-4 text-purple-600" />
-            </div>
-            <div className="whitespace-nowrap">
-              <p className="text-xs font-bold text-slate-900 leading-none">Ask</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
-            </div>
-          </motion.div>
+          <AppleThreeDOrb isSpeaking={true} size="md" />
         </motion.div>
 
         {/* Proportioned Headline */}
@@ -127,6 +60,34 @@ export function Hero() {
         >
           Practice under realistic technical interview conditions. SteerHire parses your PDF resume, probes your architecture trade-offs out loud, and delivers hiring decision scorecards.
         </motion.p>
+
+        {/* 4 Feature Badges (Sleek Horizontal Glass Bar - Zero Overlap, Ultra-Clean) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3 max-w-3xl mx-auto"
+        >
+          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
+            <FileText className="w-4 h-4 text-purple-600" />
+            <span className="text-xs font-bold text-slate-900">Analyze Resume</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
+            <Activity className="w-4 h-4 text-purple-600" />
+            <span className="text-xs font-bold text-slate-900">Ask Questions</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
+            <Cpu className="w-4 h-4 text-blue-600" />
+            <span className="text-xs font-bold text-slate-900">Evaluate Skills</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-md">
+            <Star className="w-4 h-4 text-blue-600" />
+            <span className="text-xs font-bold text-slate-900">Deliver Feedback</span>
+          </div>
+        </motion.div>
 
         {/* CTA Actions */}
         <motion.div
