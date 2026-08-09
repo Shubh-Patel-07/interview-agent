@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Sparkles } from 'lucide-react';
 
 const PLANS = [
   {
@@ -68,19 +68,21 @@ export function Pricing() {
               transition={{ duration: 0.5, delay: idx * 0.15 }}
               className={`glass-card glass-card-hover p-8 rounded-3xl border flex flex-col justify-between relative ${
                 plan.popular
-                  ? 'border-blue-500/40 shadow-xl bg-white/95'
+                  ? 'border-blue-500/40 shadow-xl bg-white/95 ring-2 ring-blue-500/20'
                   : 'border-slate-200/80 bg-white/95'
               }`}
             >
-              {plan.popular && (
-                <span className="absolute -top-3.5 right-8 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-[11px] font-bold shadow-md">
-                  Most Popular
-                </span>
-              )}
-
               <div>
-                <h3 className="text-xl font-bold text-slate-900">{plan.name}</h3>
-                <p className="text-xs text-slate-500 mt-1 font-medium">{plan.description}</p>
+                <div className="flex items-center justify-between gap-4 mb-2">
+                  <h3 className="text-xl font-bold text-slate-900">{plan.name}</h3>
+                  {plan.popular && (
+                    <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-[11px] font-bold inline-flex items-center gap-1.5 shrink-0 shadow-sm">
+                      <Sparkles className="w-3 h-3 text-blue-600 fill-blue-600" />
+                      Most Popular
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-500 font-medium">{plan.description}</p>
 
                 <div className="mt-6 flex items-baseline gap-1">
                   <span className="text-4xl font-black text-slate-900">{plan.price}</span>
