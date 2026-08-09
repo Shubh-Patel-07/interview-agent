@@ -17,12 +17,12 @@ export function Hero() {
       <Spotlight />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        {/* Top Announcement Badge (Separated with clean bottom margin) */}
+        {/* Top Announcement Badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-10 sm:mb-14 backdrop-blur-md relative z-20"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-purple-200 text-xs text-purple-600 shadow-sm mb-12 sm:mb-16 backdrop-blur-md relative z-20"
         >
           <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: '8s' }} />
           <span className="font-bold">SteerHire AI SaaS</span>
@@ -30,77 +30,79 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Assistant Entity & 4 Floating Glass Cards (No Text Clipping or Badge Overlap) */}
+        {/* 3D Robot Assistant Entity Display (Seamless Open Background - No Square Box Outline) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-10 flex items-center justify-center relative z-10 max-w-2xl mx-auto min-h-[220px]"
+          className="mb-12 relative z-10 max-w-4xl mx-auto flex items-center justify-center min-h-[320px] py-4"
         >
           {/* Card 1: Top-Left "Analyze Resume" */}
           <motion.div
-            animate={{ y: [-4, 4, -4] }}
+            animate={{ y: [-5, 5, -5] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-8 top-2 z-20 whitespace-nowrap"
+            whileHover={{ scale: 1.05, y: -6 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-6 lg:left-16 top-2 z-20 whitespace-nowrap"
           >
-            <div className="w-7 h-7 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
-              <FileText className="w-3.5 h-3.5 text-purple-600" />
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+              <FileText className="w-4 h-4 text-purple-600" />
             </div>
             <div className="whitespace-nowrap">
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Analyze</p>
-              <p className="text-[10px] font-bold text-slate-500 leading-none mt-1">Resume</p>
+              <p className="text-xs font-bold text-slate-900 leading-none">Analyze</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Resume</p>
             </div>
           </motion.div>
 
           {/* Card 2: Top-Right "Ask Questions" */}
           <motion.div
-            animate={{ y: [4, -4, 4] }}
+            animate={{ y: [5, -5, 5] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-8 top-2 z-20 whitespace-nowrap"
+            whileHover={{ scale: 1.05, y: -6 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-6 lg:right-16 top-2 z-20 whitespace-nowrap"
           >
-            <div className="w-7 h-7 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
-              <Activity className="w-3.5 h-3.5 text-purple-600" />
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+              <Activity className="w-4 h-4 text-purple-600" />
             </div>
             <div className="whitespace-nowrap">
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Ask</p>
-              <p className="text-[10px] font-bold text-slate-500 leading-none mt-1">Questions</p>
+              <p className="text-xs font-bold text-slate-900 leading-none">Ask</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
             </div>
           </motion.div>
 
           {/* Center 3D Robot Assistant Entity */}
-          <AppleThreeDOrb isSpeaking={true} size="md" />
+          <div className="relative z-10 flex items-center justify-center">
+            <AppleThreeDOrb isSpeaking={true} size="md" />
+          </div>
 
           {/* Card 3: Bottom-Left "Evaluate Skills" */}
           <motion.div
-            animate={{ y: [3, -3, 3] }}
+            animate={{ y: [4, -4, 4] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-0 lg:left-4 bottom-2 z-20 whitespace-nowrap"
+            whileHover={{ scale: 1.05, y: -6 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-10 bottom-2 z-20 whitespace-nowrap"
           >
-            <div className="w-7 h-7 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-              <Cpu className="w-3.5 h-3.5 text-blue-600" />
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+              <Cpu className="w-4 h-4 text-blue-600" />
             </div>
             <div className="whitespace-nowrap">
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Evaluate</p>
-              <p className="text-[10px] font-bold text-slate-500 leading-none mt-1">Skills</p>
+              <p className="text-xs font-bold text-slate-900 leading-none">Evaluate</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Skills</p>
             </div>
           </motion.div>
 
           {/* Card 4: Bottom-Right "Deliver Feedback" */}
           <motion.div
-            animate={{ y: [-3, 3, -3] }}
+            animate={{ y: [-4, 4, -4] }}
             transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="hidden md:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-0 lg:right-4 bottom-2 z-20 whitespace-nowrap"
+            whileHover={{ scale: 1.05, y: -6 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-10 bottom-2 z-20 whitespace-nowrap"
           >
-            <div className="w-7 h-7 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-              <Star className="w-3.5 h-3.5 text-blue-600" />
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+              <Star className="w-4 h-4 text-blue-600" />
             </div>
             <div className="whitespace-nowrap">
-              <p className="text-[11px] font-bold text-slate-900 leading-none">Deliver</p>
-              <p className="text-[10px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
+              <p className="text-xs font-bold text-slate-900 leading-none">Deliver</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
             </div>
           </motion.div>
         </motion.div>
