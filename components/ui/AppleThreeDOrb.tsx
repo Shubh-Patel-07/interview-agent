@@ -16,45 +16,53 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
   const [isHovered, setIsHovered] = useState(false);
 
   const pixelDimensions = {
-    sm: 110,
-    md: 240,
-    lg: 320,
+    sm: 140,
+    md: 360,
+    lg: 440,
   }[size];
 
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
 
-    // 1. Scene, Camera, Renderer Setup
+    // 1. Scene, Camera & High-Performance Renderer Setup (Expanded View Frustum so NO rings ever clip)
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-    camera.position.z = 4.2;
+    camera.position.z = 5.2;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(pixelDimensions, pixelDimensions);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
-    // 2. Robot AI Master Head Group
+    // 2. Photorealistic Ceramic Glass AI Entity Group
     const masterGroup = new THREE.Group();
 
-    // White Ceramic Glossy Head Outer Shell
+    // Apple-Style Ceramic Glass Outer Shell Material
     const headGeo = new THREE.SphereGeometry(1.0, 64, 64);
-    const headMat = new THREE.MeshStandardMaterial({
+    const headMat = new THREE.MeshPhysicalMaterial({
       color: 0xffffff,
-      roughness: 0.15,
-      metalness: 0.1,
+      roughness: 0.08,
+      metalness: 0.15,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.04,
+      transmission: 0.12,
+      ior: 1.5,
+      reflectivity: 0.95,
     });
     const headMesh = new THREE.Mesh(headGeo, headMat);
     masterGroup.add(headMesh);
 
     // Side Ear Pod Cuffs (Headphones Pods)
-    const earGeo = new THREE.CylinderGeometry(0.3, 0.34, 0.2, 32);
+    const earGeo = new THREE.CylinderGeometry(0.3, 0.35, 0.22, 32);
     earGeo.rotateZ(Math.PI / 2);
-    const earMat = new THREE.MeshStandardMaterial({
-      color: 0xe2e8f0,
-      roughness: 0.2,
-      metalness: 0.2,
+    const earMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf1f5f9,
+      roughness: 0.12,
+      metalness: 0.3,
+      clearcoat: 1.0,
     });
     const leftEar = new THREE.Mesh(earGeo, earMat);
     leftEar.position.set(-1.02, 0, 0);
@@ -67,10 +75,12 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
     // Dark Glossy Visor Face
     const visorGeo = new THREE.SphereGeometry(0.88, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.44);
     visorGeo.rotateX(Math.PI / 2);
-    const visorMat = new THREE.MeshStandardMaterial({
-      color: 0x070c18,
-      roughness: 0.05,
-      metalness: 0.9,
+    const visorMat = new THREE.MeshPhysicalMaterial({
+      color: 0x050a18,
+      roughness: 0.02,
+      metalness: 0.95,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.02,
     });
     const visorMesh = new THREE.Mesh(visorGeo, visorMat);
     visorMesh.position.set(0, 0, 0.16);
@@ -81,8 +91,8 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
     const eyeMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
       emissive: new THREE.Color(0x38bdf8),
-      emissiveIntensity: 2.2,
-      roughness: 0.1,
+      emissiveIntensity: 2.5,
+      roughness: 0.05,
     });
 
     const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
@@ -97,42 +107,46 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
 
     scene.add(masterGroup);
 
-    // 3. Multi-Layer Energy System
-    const ringGeo1 = new THREE.TorusGeometry(1.55, 0.02, 16, 100);
+    // 3. Multi-Layer Orbital Energy Rings (Sized proportionally inside camera view)
+    const ringGeo1 = new THREE.TorusGeometry(1.35, 0.018, 16, 100);
     const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.8 });
     const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
     ringMesh1.rotation.x = Math.PI / 3.2;
     scene.add(ringMesh1);
 
-    const ringGeo2 = new THREE.TorusGeometry(1.75, 0.015, 16, 100);
+    const ringGeo2 = new THREE.TorusGeometry(1.5, 0.014, 16, 100);
     const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 });
     const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
     ringMesh2.rotation.x = -Math.PI / 3.8;
     ringMesh2.rotation.y = Math.PI / 5;
     scene.add(ringMesh2);
 
-    // Holographic Base Platform
-    const platformGeo1 = new THREE.CylinderGeometry(1.6, 1.8, 0.04, 64);
-    const platformMat1 = new THREE.MeshStandardMaterial({
-      color: 0xe2e8f0,
-      roughness: 0.2,
+    // Soft Fading Horizontal Orbital Base Ring
+    const baseRingGeo = new THREE.TorusGeometry(1.2, 0.02, 16, 100);
+    const baseRingMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.45,
     });
-    const platformMesh1 = new THREE.Mesh(platformGeo1, platformMat1);
-    platformMesh1.position.y = -1.3;
-    scene.add(platformMesh1);
+    const baseRingMesh = new THREE.Mesh(baseRingGeo, baseRingMat);
+    baseRingMesh.rotation.x = Math.PI / 2;
+    baseRingMesh.position.y = -1.0;
+    scene.add(baseRingMesh);
 
-    // 4. Directional High-Contrast Sun & Ambient Lighting
-    const sunLight = new THREE.DirectionalLight(0xffffff, 3.5);
-    sunLight.position.set(5, 5, 5);
-    scene.add(sunLight);
+    // 4. Studio Lighting System (Key, Fill & Backlight)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 4.0);
+    keyLight.position.set(5, 6, 6);
+    scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x38bdf8, 2.0);
-    fillLight.position.set(-5, -2, 3);
-    scene.add(fillLight);
+    const cyanFillLight = new THREE.DirectionalLight(0x38bdf8, 2.5);
+    cyanFillLight.position.set(-5, -2, 4);
+    scene.add(cyanFillLight);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    const violetBackLight = new THREE.DirectionalLight(0x8b5cf6, 2.0);
+    violetBackLight.position.set(0, 5, -5);
+    scene.add(violetBackLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
     // 5. Mouse Parallax LERP Tracking
@@ -195,6 +209,9 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
       ringMesh2.rotation.z = -elapsedTime * 0.28 * ringSpeedMultiplier;
       ringMesh2.position.y = floatY * 0.4;
 
+      baseRingMesh.rotation.z = elapsedTime * 0.2 * ringSpeedMultiplier;
+      baseRingMesh.position.y = -1.0 + floatY * 0.3;
+
       const eyeScale = 1 + Math.sin(elapsedTime * eyePulseFrequency) * 0.08;
       leftEye.scale.set(1, eyeScale, 1);
       rightEye.scale.set(1, eyeScale, 1);
@@ -223,8 +240,8 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
       ringMat1.dispose();
       ringGeo2.dispose();
       ringMat2.dispose();
-      platformGeo1.dispose();
-      platformMat1.dispose();
+      baseRingGeo.dispose();
+      baseRingMat.dispose();
       renderer.dispose();
     };
   }, [aiState, isSpeaking, pixelDimensions]);
@@ -238,7 +255,7 @@ export function AppleThreeDOrb({ aiState = 'idle', isSpeaking = false, size = 'm
       {/* Soft Ambient Radial Glow */}
       <div
         className={`absolute rounded-full bg-gradient-to-tr from-purple-500/30 via-blue-500/25 to-cyan-400/30 blur-3xl pointer-events-none transition-all duration-500 ${
-          isHovered ? 'w-64 h-64 opacity-100 scale-110' : 'w-56 h-56 opacity-80 scale-100'
+          isHovered ? 'w-72 h-72 opacity-100 scale-110' : 'w-64 h-64 opacity-80 scale-100'
         }`}
       />
 

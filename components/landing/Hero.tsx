@@ -30,19 +30,19 @@ export function Hero() {
           <span className="text-slate-500 font-medium">Build the interviewer, not the interview</span>
         </motion.div>
 
-        {/* 3D Robot Assistant Entity Display (Seamless Open Background - No Square Box Outline) */}
+        {/* 3D Robot Assistant Entity Display (Clean Vertical Stacked Left/Right Wing Cards Layout) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12 relative z-10 max-w-4xl mx-auto flex items-center justify-center min-h-[320px] py-4"
+          className="mb-12 relative z-10 max-w-5xl mx-auto flex items-center justify-center min-h-[380px] py-6"
         >
-          {/* Card 1: Top-Left "Analyze Resume" */}
+          {/* Card 1: TOP-LEFT "Analyze Resume" (Positioned UP ABOVE on Left Wing) */}
           <motion.div
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -6 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-6 lg:left-16 top-2 z-20 whitespace-nowrap"
+            animate={{ y: [-6, 6, -6] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.06, y: -8 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-8 top-2 z-20 whitespace-nowrap"
           >
             <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
               <FileText className="w-4 h-4 text-purple-600" />
@@ -53,33 +53,12 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Card 2: Top-Right "Ask Questions" */}
+          {/* Card 2: BOTTOM-LEFT "Evaluate Skills" (Positioned DOWN BELOW on Left Wing) */}
           <motion.div
-            animate={{ y: [5, -5, 5] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -6 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-6 lg:right-16 top-2 z-20 whitespace-nowrap"
-          >
-            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
-              <Activity className="w-4 h-4 text-purple-600" />
-            </div>
-            <div className="whitespace-nowrap">
-              <p className="text-xs font-bold text-slate-900 leading-none">Ask</p>
-              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
-            </div>
-          </motion.div>
-
-          {/* Center 3D Robot Assistant Entity */}
-          <div className="relative z-10 flex items-center justify-center">
-            <AppleThreeDOrb isSpeaking={true} size="md" />
-          </div>
-
-          {/* Card 3: Bottom-Left "Evaluate Skills" */}
-          <motion.div
-            animate={{ y: [4, -4, 4] }}
+            animate={{ y: [6, -6, 6] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -6 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-10 bottom-2 z-20 whitespace-nowrap"
+            whileHover={{ scale: 1.06, y: -8 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute left-2 lg:left-8 bottom-2 z-20 whitespace-nowrap"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Cpu className="w-4 h-4 text-blue-600" />
@@ -90,12 +69,17 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Card 4: Bottom-Right "Deliver Feedback" */}
+          {/* Center 3D Robot Assistant Entity */}
+          <div className="relative z-10 flex items-center justify-center px-16">
+            <AppleThreeDOrb isSpeaking={true} size="md" />
+          </div>
+
+          {/* Card 4: TOP-RIGHT "Deliver Feedback" (Positioned UP ABOVE on Right Wing) */}
           <motion.div
-            animate={{ y: [-4, 4, -4] }}
-            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{ scale: 1.05, y: -6 }}
-            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-10 bottom-2 z-20 whitespace-nowrap"
+            animate={{ y: [-5, 5, -5] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.06, y: -8 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-8 top-2 z-20 whitespace-nowrap"
           >
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
               <Star className="w-4 h-4 text-blue-600" />
@@ -103,6 +87,22 @@ export function Hero() {
             <div className="whitespace-nowrap">
               <p className="text-xs font-bold text-slate-900 leading-none">Deliver</p>
               <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Feedback</p>
+            </div>
+          </motion.div>
+
+          {/* Card 3: BOTTOM-RIGHT "Ask Questions" (Positioned DOWN BELOW on Right Wing) */}
+          <motion.div
+            animate={{ y: [5, -5, 5] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.06, y: -8 }}
+            className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl glass-card bg-white/95 border border-slate-200/90 shadow-xl text-left absolute right-2 lg:right-8 bottom-2 z-20 whitespace-nowrap"
+          >
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+              <Activity className="w-4 h-4 text-purple-600" />
+            </div>
+            <div className="whitespace-nowrap">
+              <p className="text-xs font-bold text-slate-900 leading-none">Ask</p>
+              <p className="text-[11px] font-bold text-slate-500 leading-none mt-1">Questions</p>
             </div>
           </motion.div>
         </motion.div>
